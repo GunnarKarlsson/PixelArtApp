@@ -22,12 +22,13 @@ public slots:
     int getWidth();
     int getHeight();
 private:
-       const int cellSize = 40;
-       const int row_count = 4;
-       const int col_count = 4;
-       QGraphicsScene *scene;
-       std::vector<QColor*> paletteColors;
-       QColor *selectedColor;
+    const int borderSize = 10;
+    const int cellSize = 40;
+    const int row_count = 4;
+    const int col_count = 4;
+    QGraphicsScene *scene;
+    std::vector<QColor*> paletteColors;
+    int selectionIndex = 0;
 };
 
 #endif // PALETTE_H

@@ -6,9 +6,10 @@ Palette::Palette(QWidget *parent) {
 
     scene = new QGraphicsScene();
     setScene(scene);
-    setAlignment(Qt::AlignTop|Qt::AlignLeft);
+    //setAlignment(Qt::AlignTop|Qt::AlignLeft);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setStyleSheet("background: transparent; border: transparent;");
 
     std::vector<QString> colors =
     {"#000000","#1D2B52","#7E2553","#008651",
@@ -30,16 +31,19 @@ Palette::~Palette() {
 }
 
 int Palette::getWidth() {
-    return row_count * cellSize;
+    return row_count * cellSize + borderSize*2;
 }
 
 int Palette::getHeight() {
-    return col_count * cellSize;
+    return col_count * cellSize + borderSize*2;
 }
 
 void Palette::mousePressEvent(QMouseEvent * e) {
     qDebug() << e->pos().x() << endl;
     qDebug() << e->pos().y() << endl;
+
+
+
 }
 
 void Palette::mouseReleaseEvent(QMouseEvent * e) {
@@ -55,14 +59,33 @@ void Palette::mouseMoveEvent(QMouseEvent * e) {
 }
 
 void Palette::render() {
-    QPen pen(Qt::NoPen);
+    QPen noPen(Qt::NoPen);
+    QBrush noBrush(Qt::NoBrush);
+
+    QPen selectionPen("#FFF0EA");
+    selectionPen.setWidth(5);
+    selectionPen.setCapStyle(Qt::SquareCap);
+    selectionPen.setJoinStyle(Qt::MiterJoin);
+
+    QPen borderPen("#000000");
+    borderPen.setWidth(10);
+    borderPen.setCapStyle(Qt::SquareCap);
+    borderPen.setJoinStyle(Qt::MiterJoin);
+
+    qDebug() << "border: "<< borderSize << endl;
 
     for (int i = 0; i < paletteColors.size(); i++) {
-        int x = i%4;
-        int y = i/4;
+        int x = i % col_count;
+        int y = i / row_count;
         QColor *color = paletteColors[i];
-        qDebug() << "color: " << color->name() << endl;
+        //qDebug() << "color: " << color->name() << endl;
         QBrush brush(*color);
-        scene->addRect(QRect(x*cellSize,y*cellSize,cellSize,cellSize), pen, brush);
+        scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
     }
+
+    int selectionX = selectionIndex % col_count;
+    int selectionY = selectionIndex % row_count;
+
+    scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), borderPen, noBrush);
+    scene->addRect(QRect((selectionX*cellSize) + borderSize/2, (selectionY*cellSize) + borderSize/2, cellSize, cellSize), selectionPen, noBrush);
 }
