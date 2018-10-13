@@ -42,8 +42,21 @@ void Palette::mousePressEvent(QMouseEvent * e) {
     qDebug() << e->pos().x() << endl;
     qDebug() << e->pos().y() << endl;
 
+    int x = e->pos().x();
+    x /= cellSize;
+    x %= col_count;
 
+    int y = e->pos().y();
+    y /= cellSize;
 
+    qDebug() << "x: "  << x << endl;
+    qDebug() << "y: " << y << endl;
+
+    selectionIndex = x + y * col_count;
+    qDebug() << "selectionIndex: " << selectionIndex << endl;
+
+    render();
+    update();
 }
 
 void Palette::mouseReleaseEvent(QMouseEvent * e) {
@@ -84,7 +97,7 @@ void Palette::render() {
     }
 
     int selectionX = selectionIndex % col_count;
-    int selectionY = selectionIndex % row_count;
+    int selectionY = selectionIndex / row_count;
 
     scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), borderPen, noBrush);
     scene->addRect(QRect((selectionX*cellSize) + borderSize/2, (selectionY*cellSize) + borderSize/2, cellSize, cellSize), selectionPen, noBrush);
