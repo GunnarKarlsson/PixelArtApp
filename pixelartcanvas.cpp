@@ -12,7 +12,7 @@ PixelArtCanvas::PixelArtCanvas(QWidget *parent) {
         c->setNamedColor("#FFF1E8");
         canvasColors.push_back(c);
     }
-    render();
+    render(true);
 }
 
 void PixelArtCanvas::setPalette(Palette *p) {
@@ -52,7 +52,7 @@ void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
 
     QColor selectedColor = palette->getSelectedColor();
     canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
-    render();
+    render(false);
     isMousePressed = true;
 }
 
@@ -98,10 +98,10 @@ void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
 
     QColor selectedColor = palette->getSelectedColor();
     canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
-    render();
+    render(false);
 }
 
-void PixelArtCanvas::render() {
+void PixelArtCanvas::render(bool all) {
 
     QPen borderPen("#000000");
     borderPen.setWidth(10);
@@ -110,11 +110,18 @@ void PixelArtCanvas::render() {
 
     QPen noPen(Qt::NoPen);
     QBrush noBrush(Qt::NoBrush);
-
+    if (all) {
     for (int i = 0; i < canvasColors.size(); i++) {
         int x = i % col_count;
         int y = i / row_count;
         QColor *color = canvasColors[i];
+        QBrush brush(*color);
+        scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
+    }
+    } else {
+        int x = selectionIndex % col_count;
+        int y = selectionIndex / row_count;
+        QColor *color = canvasColors[selectionIndex];
         QBrush brush(*color);
         scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
     }

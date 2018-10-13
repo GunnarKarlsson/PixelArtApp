@@ -18,7 +18,7 @@ public slots:
     void mouseReleaseEvent(QMouseEvent * e);
     void mouseDoubleClickEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
-    void render();
+    void render(bool all);
     int getWidth();
     int getHeight();
     void setPalette(Palette *palette);
