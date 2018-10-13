@@ -21,7 +21,7 @@ public slots:
     void render();
 private:
        QGraphicsScene * scene;
-       std::vector<PaletteColor*> paletteColors;
+       std::vector<QColor*> paletteColors;
 };
 
 #endif // PALETTE_H

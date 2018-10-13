@@ -1,5 +1,6 @@
 #include "palette.h"
 #include "common.h"
+#include <QDebug>
 
 Palette::Palette(QWidget *parent) {
 
@@ -7,9 +8,11 @@ Palette::Palette(QWidget *parent) {
     setScene(scene);
     setAlignment(Qt::AlignTop|Qt::AlignLeft);
 
-    PaletteColor *c1 = new PaletteColor("#000000");
+    QColor *c1 = new QColor();
+    c1->setNamedColor("#999999");
     paletteColors.push_back(c1);
-    PaletteColor *c2 = new PaletteColor("#1D2B52");
+    QColor *c2 = new QColor();
+    c2->setNamedColor("#BBBBBB");
     paletteColors.push_back(c2);
     render();
 }
@@ -36,8 +39,18 @@ void Palette::mouseMoveEvent(QMouseEvent * e) {
 
 void Palette::render() {
     QPen pen(Qt::NoPen);
+
+    for (int i = 0; i < paletteColors.size(); i++) {
+        QColor *color = paletteColors[i];
+        qDebug() << "color: " << color->name() << endl;
+        QBrush brush(*color);
+        //brush.setColor(*color);
+        scene->addRect(QRect(i*20,0,20,20), pen, brush);
+    }
+/*
     QColor color;
     color.setNamedColor("#999999");
     QBrush brush(color);
     scene->addRect(QRect(0,0,20,20), pen, brush);
+*/
 }

@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     palette = new Palette();
-    //palette->resize(160, 160);
     palette->setFixedSize(160, 160);
 
     QLayout * layout = new QHBoxLayout();
