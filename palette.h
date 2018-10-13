@@ -20,6 +20,7 @@ public slots:
     void render();
     int getWidth();
     int getHeight();
+    QColor getSelectedColor();
 
 private:
     const int borderSize = 10;

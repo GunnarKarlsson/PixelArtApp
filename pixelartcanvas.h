@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMouseEvent>
+#include "palette.h"
 
 class PixelArtCanvas : public QGraphicsView
 {
@@ -20,14 +21,18 @@ public slots:
     void render();
     int getWidth();
     int getHeight();
+    void setPalette(Palette *palette);
 
 private:
+    int selectionIndex = 0;
     const int borderSize = 10;
     const int cellSize = 20;
     const int row_count = 16;
     const int col_count = 16;
     QGraphicsScene *scene;
     std::vector<QColor*> canvasColors;
+    Palette *palette;
+    bool isMousePressed = false;
 };
 
 #endif // PIXELARTCANVAS_H

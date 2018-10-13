@@ -1,4 +1,5 @@
 #include "pixelartcanvas.h"
+#include <QDebug>
 
 PixelArtCanvas::PixelArtCanvas(QWidget *parent) {
     scene = new QGraphicsScene();
@@ -14,6 +15,10 @@ PixelArtCanvas::PixelArtCanvas(QWidget *parent) {
     render();
 }
 
+void PixelArtCanvas::setPalette(Palette *p) {
+    palette = p;
+}
+
 int PixelArtCanvas::getWidth() {
     return row_count * cellSize + borderSize*2;
 }
@@ -27,11 +32,32 @@ PixelArtCanvas::~PixelArtCanvas() {
 }
 
 void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
+    int yOffset = 10;
+    int xOffset = 10;
+    qDebug() << e->pos().x() << endl;
+    qDebug() << e->pos().y() << endl;
 
+    int x = e->pos().x() - xOffset;
+    x /= cellSize;
+    x %= col_count;
+
+    int y = e->pos().y() - yOffset;
+    y /= cellSize;
+
+    qDebug() << "x: "  << x << endl;
+    qDebug() << "y: " << y << endl;
+
+    int selectionIndex = x + y * col_count;
+    qDebug() << "selectionIndex: " << selectionIndex << endl;
+
+    QColor selectedColor = palette->getSelectedColor();
+    canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
+    render();
+    isMousePressed = true;
 }
 
 void PixelArtCanvas::mouseReleaseEvent(QMouseEvent * e) {
-
+    isMousePressed = false;
 }
 
 void PixelArtCanvas::mouseDoubleClickEvent(QMouseEvent * e) {
@@ -39,7 +65,27 @@ void PixelArtCanvas::mouseDoubleClickEvent(QMouseEvent * e) {
 }
 
 void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
+    int yOffset = 10;
+    int xOffset = 10;
+    qDebug() << e->pos().x() << endl;
+    qDebug() << e->pos().y() << endl;
 
+    int x = e->pos().x() - xOffset;
+    x /= cellSize;
+    x %= col_count;
+
+    int y = e->pos().y() - yOffset;
+    y /= cellSize;
+
+    qDebug() << "x: "  << x << endl;
+    qDebug() << "y: " << y << endl;
+
+    selectionIndex = x + y * col_count;
+    qDebug() << "selectionIndex: " << selectionIndex << endl;
+
+    QColor selectedColor = palette->getSelectedColor();
+    canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
+    render();
 }
 
 void PixelArtCanvas::render() {

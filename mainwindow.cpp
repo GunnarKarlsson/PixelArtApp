@@ -11,11 +11,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    pixelArtCanvas = new PixelArtCanvas();
-    pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
-
     palette = new Palette();
     palette->setFixedSize(palette->getWidth(), palette->getHeight());
+
+    pixelArtCanvas = new PixelArtCanvas();
+    pixelArtCanvas->setPalette(palette);
+    pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
 
     QLayout * layout = new QHBoxLayout();
     ui->centralWidget->setLayout(layout);

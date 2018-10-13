@@ -29,6 +29,10 @@ Palette::~Palette() {
 
 }
 
+QColor Palette::getSelectedColor() {
+    return *(paletteColors[selectionIndex]);
+}
+
 int Palette::getWidth() {
     return row_count * cellSize + borderSize*2;
 }
@@ -38,14 +42,15 @@ int Palette::getHeight() {
 }
 
 void Palette::mousePressEvent(QMouseEvent * e) {
+    int offset = 5;
     qDebug() << e->pos().x() << endl;
     qDebug() << e->pos().y() << endl;
 
-    int x = e->pos().x();
+    int x = e->pos().x();// - borderSize*2;
     x /= cellSize;
     x %= col_count;
 
-    int y = e->pos().y();
+    int y = e->pos().y();// - borderSize*2; //- offset;
     y /= cellSize;
 
     qDebug() << "x: "  << x << endl;
