@@ -23,7 +23,7 @@ public slots:
     int getHeight();
 private:
     const int borderSize = 10;
-    const int cellSize = 40;
+    const int cellSize = 60;
     const int row_count = 4;
     const int col_count = 4;
     QGraphicsScene *scene;
