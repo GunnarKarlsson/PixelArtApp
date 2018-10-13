@@ -30,7 +30,11 @@ Palette::~Palette() {
 }
 
 QColor Palette::getSelectedColor() {
-    return *(paletteColors[selectionIndex]);
+    if (selectionIndex > col_count * row_count) {
+        selectionIndex = 0;
+    }
+        return *(paletteColors[selectionIndex]);
+
 }
 
 int Palette::getWidth() {

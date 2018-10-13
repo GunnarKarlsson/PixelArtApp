@@ -100,6 +100,9 @@ void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
     qDebug() << "selectionIndex: " << selectionIndex << endl;
 
     QColor selectedColor = palette->getSelectedColor();
+    if (selectionIndex > col_count * row_count) {
+        selectionIndex = 0;
+    }
     canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
     render(false);
 }

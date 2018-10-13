@@ -41,7 +41,7 @@ void MainWindow::save() {
 
     qDebug() << "pixelArtCanvas x: " << pixelArtCanvas->rect().x() << endl;
 
-    int offset = 13;
+    int offset = 0;
     QRect rect(pixelArtCanvas->x(), pixelArtCanvas->y() + offset, pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
 
     QImage image = grab(rect).toImage();
