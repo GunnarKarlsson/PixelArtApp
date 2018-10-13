@@ -5,11 +5,11 @@ PixelArtCanvas::PixelArtCanvas(QWidget *parent) {
     scene = new QGraphicsScene();
     setScene(scene);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //setStyleSheet("background: transparent; border: transparent;");
+    setStyleSheet("background: transparent; border: transparent;");
 
     for (int i = 0; i < (col_count * row_count); i++) {
         QColor *c = new QColor();
-        c->setNamedColor("#FFEC26");
+        c->setNamedColor("#FFF1E8");
         canvasColors.push_back(c);
     }
     render();
@@ -103,6 +103,11 @@ void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
 
 void PixelArtCanvas::render() {
 
+    QPen borderPen("#000000");
+    borderPen.setWidth(10);
+    borderPen.setCapStyle(Qt::SquareCap);
+    borderPen.setJoinStyle(Qt::MiterJoin);
+
     QPen noPen(Qt::NoPen);
     QBrush noBrush(Qt::NoBrush);
 
@@ -113,4 +118,5 @@ void PixelArtCanvas::render() {
         QBrush brush(*color);
         scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
     }
+    scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), borderPen, noBrush);
 }
