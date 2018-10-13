@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     palette = new Palette();
-    palette->setFixedSize(160, 160);
+    palette->setFixedSize(palette->getWidth(), palette->getHeight());
 
     QLayout * layout = new QHBoxLayout();
     ui->centralWidget->setLayout(layout);

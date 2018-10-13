@@ -19,9 +19,15 @@ public slots:
     void mouseDoubleClickEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
     void render();
+    int getWidth();
+    int getHeight();
 private:
-       QGraphicsScene * scene;
+       const int cellSize = 40;
+       const int row_count = 4;
+       const int col_count = 4;
+       QGraphicsScene *scene;
        std::vector<QColor*> paletteColors;
+       QColor *selectedColor;
 };
 
 #endif // PALETTE_H
