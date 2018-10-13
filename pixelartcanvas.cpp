@@ -67,8 +67,21 @@ void PixelArtCanvas::mouseDoubleClickEvent(QMouseEvent * e) {
 void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
     int yOffset = 10;
     int xOffset = 10;
+
+    int minMove = 5;
+
+    int xChange = abs(lastMousePosX - e->pos().x());
+    int yChange = abs(lastMousePosY - e->pos().y());
+
+    if (xChange < minMove && yChange < minMove) {
+        return;
+    }
+
     qDebug() << e->pos().x() << endl;
     qDebug() << e->pos().y() << endl;
+
+    lastMousePosX = e->pos().x();
+    lastMousePosY = e->pos().y();
 
     int x = e->pos().x() - xOffset;
     x /= cellSize;

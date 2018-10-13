@@ -33,6 +33,8 @@ private:
     std::vector<QColor*> canvasColors;
     Palette *palette;
     bool isMousePressed = false;
+    int lastMousePosX = 0;
+    int lastMousePosY = 0;
 };
 
 #endif // PIXELARTCANVAS_H
