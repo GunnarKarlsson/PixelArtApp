@@ -3,7 +3,6 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMouseEvent>
-#include "palettecolor.h"
 
 class Palette : public QGraphicsView
 {
@@ -21,6 +20,7 @@ public slots:
     void render();
     int getWidth();
     int getHeight();
+
 private:
     const int borderSize = 10;
     const int cellSize = 60;

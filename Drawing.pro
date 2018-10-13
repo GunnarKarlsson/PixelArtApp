@@ -32,7 +32,6 @@ HEADERS += \
         mainwindow.h \
     pixelartcanvas.h \
     palette.h \
-    palettecolor.h \
     common.h
 
 FORMS += \

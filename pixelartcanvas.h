@@ -17,8 +17,17 @@ public slots:
     void mouseReleaseEvent(QMouseEvent * e);
     void mouseDoubleClickEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
+    void render();
+    int getWidth();
+    int getHeight();
+
 private:
-       QGraphicsScene * scene;
+    const int borderSize = 10;
+    const int cellSize = 20;
+    const int row_count = 16;
+    const int col_count = 16;
+    QGraphicsScene *scene;
+    std::vector<QColor*> canvasColors;
 };
 
 #endif // PIXELARTCANVAS_H

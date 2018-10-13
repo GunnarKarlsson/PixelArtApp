@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include "palette.h"
+#include "pixelartcanvas.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,7 @@ public:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
+    PixelArtCanvas *pixelArtCanvas;
     Palette *palette;
 
 };
