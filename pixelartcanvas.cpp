@@ -52,7 +52,7 @@ void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
 
     QColor selectedColor = palette->getSelectedColor();
     canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
-    render(false);
+    render(true);
     isMousePressed = true;
 }
 
@@ -65,6 +65,9 @@ void PixelArtCanvas::mouseDoubleClickEvent(QMouseEvent * e) {
 }
 
 void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
+    if (!isMousePressed) {
+        return;
+    }
     int yOffset = 10;
     int xOffset = 10;
 

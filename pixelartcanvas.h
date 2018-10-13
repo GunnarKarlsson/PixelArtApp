@@ -26,9 +26,9 @@ public slots:
 private:
     int selectionIndex = 0;
     const int borderSize = 10;
-    const int cellSize = 20;
-    const int row_count = 16;
-    const int col_count = 16;
+    const int cellSize = 24;
+    const int row_count = 12;
+    const int col_count = 12;
     QGraphicsScene *scene;
     std::vector<QColor*> canvasColors;
     Palette *palette;
