@@ -4,6 +4,7 @@
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QDateTime>
+#include <QFontDatabase>
 #include <common.h>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -14,6 +15,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    int id = QFontDatabase::addApplicationFont(":/Font/Fipps-Regular.otf");
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    QFont font(family);
+
     palette = new Palette();
     palette->setFixedSize(palette->getWidth(), palette->getHeight());
 
@@ -21,7 +26,12 @@ MainWindow::MainWindow(QWidget *parent) :
     pixelArtCanvas->setPalette(palette);
     pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
 
-    saveButton = new QPushButton("save");
+    saveButton = new QPushButton("SAVE");
+    saveButton->setFont(font);
+    QFont f = saveButton->font();
+    f.setPointSize(16);
+    saveButton->setFont(f);
+    saveButton->setStyleSheet("background-color: #FFFFFF;");
     connect(saveButton, SIGNAL (released()),this, SLOT (save()));
 
     QVBoxLayout *mainLayout = new QVBoxLayout();

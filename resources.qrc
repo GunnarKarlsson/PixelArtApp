@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Font">
+        <file>Fipps-Regular.otf</file>
+    </qresource>
+</RCC>
