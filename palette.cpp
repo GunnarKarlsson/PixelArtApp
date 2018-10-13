@@ -6,7 +6,6 @@ Palette::Palette(QWidget *parent) {
 
     scene = new QGraphicsScene();
     setScene(scene);
-    //setAlignment(Qt::AlignTop|Qt::AlignLeft);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("background: transparent; border: transparent;");
@@ -91,7 +90,6 @@ void Palette::render() {
         int x = i % col_count;
         int y = i / row_count;
         QColor *color = paletteColors[i];
-        //qDebug() << "color: " << color->name() << endl;
         QBrush brush(*color);
         scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
     }
