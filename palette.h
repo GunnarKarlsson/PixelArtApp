@@ -10,6 +10,7 @@ class Palette : public QGraphicsView
 
 public:
     Palette(QWidget *parent = 0);
+    ~Palette();
 
 public slots:
     void mousePressEvent(QMouseEvent * e);

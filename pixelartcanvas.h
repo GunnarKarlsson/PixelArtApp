@@ -10,6 +10,7 @@ class PixelArtCanvas : public QGraphicsView
 
 public:
     PixelArtCanvas(QWidget *parent = 0);
+    ~PixelArtCanvas();
 
 public slots:
     void mousePressEvent(QMouseEvent * e);
