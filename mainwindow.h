@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QPushButton>
 #include "palette.h"
 #include "pixelartcanvas.h"
 
@@ -18,11 +19,16 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+public slots:
+     void save();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     PixelArtCanvas *pixelArtCanvas;
     Palette *palette;
+    QPushButton *saveButton;
 
 };
 
