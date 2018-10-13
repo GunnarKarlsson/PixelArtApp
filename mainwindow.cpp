@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QDebug>
 #include <QDateTime>
 #include <common.h>
@@ -23,8 +24,17 @@ MainWindow::MainWindow(QWidget *parent) :
     saveButton = new QPushButton("save");
     connect(saveButton, SIGNAL (released()),this, SLOT (save()));
 
+    QVBoxLayout *mainLayout = new QVBoxLayout();
+
+    QLayout *imageListLayout = new QHBoxLayout();
+    imageListLayout->addWidget(new QPushButton("test1"));
+    imageListLayout->addWidget(new QPushButton("test2"));
+    imageListLayout->addWidget(new QPushButton("test3"));
+
     QLayout * layout = new QHBoxLayout();
-    ui->centralWidget->setLayout(layout);
+    mainLayout->addLayout(layout);
+    mainLayout->addLayout(imageListLayout);
+    ui->centralWidget->setLayout(mainLayout);
     layout->addWidget(saveButton);
     layout->addWidget(pixelArtCanvas);
     layout->addWidget(palette);
