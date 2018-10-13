@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMouseEvent>
+#include "palettecolor.h"
 
 class Palette : public QGraphicsView
 {
@@ -17,8 +18,10 @@ public slots:
     void mouseReleaseEvent(QMouseEvent * e);
     void mouseDoubleClickEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
+    void render();
 private:
        QGraphicsScene * scene;
+       std::vector<PaletteColor*> paletteColors;
 };
 
 #endif // PALETTE_H

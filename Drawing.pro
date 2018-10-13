@@ -31,7 +31,9 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     pixelartcanvas.h \
-    palette.h
+    palette.h \
+    palettecolor.h \
+    common.h
 
 FORMS += \
         mainwindow.ui
