@@ -8,12 +8,18 @@ Palette::Palette(QWidget *parent) {
     setScene(scene);
     setAlignment(Qt::AlignTop|Qt::AlignLeft);
 
-    QColor *c1 = new QColor();
-    c1->setNamedColor("#999999");
-    paletteColors.push_back(c1);
-    QColor *c2 = new QColor();
-    c2->setNamedColor("#BBBBBB");
-    paletteColors.push_back(c2);
+    std::vector<QString> colors =
+    {"#000000","#1D2B52","#7E2553","#008651",
+     "#AB5135","#5F564F","#C2C3C7","#FFF1E8",
+    "#FE044F","#FFA300","#FFEC26","#00E435",
+     "#2AADFF","#82769C","#FF77A9","#FECCA9"
+    };
+
+    for (int i = 0; i < colors.size(); i++) {
+        QColor *c = new QColor();
+        c->setNamedColor(colors[i]);
+        paletteColors.push_back(c);
+    }
     render();
 }
 
@@ -38,19 +44,15 @@ void Palette::mouseMoveEvent(QMouseEvent * e) {
 }
 
 void Palette::render() {
+    int size = 40;
     QPen pen(Qt::NoPen);
 
     for (int i = 0; i < paletteColors.size(); i++) {
+        int x = i%4;
+        int y = i/4;
         QColor *color = paletteColors[i];
         qDebug() << "color: " << color->name() << endl;
         QBrush brush(*color);
-        //brush.setColor(*color);
-        scene->addRect(QRect(i*20,0,20,20), pen, brush);
+        scene->addRect(QRect(x*size,y*size,size,size), pen, brush);
     }
-/*
-    QColor color;
-    color.setNamedColor("#999999");
-    QBrush brush(color);
-    scene->addRect(QRect(0,0,20,20), pen, brush);
-*/
 }
