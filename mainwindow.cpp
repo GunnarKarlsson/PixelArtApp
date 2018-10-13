@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QHBoxLayout>
 #include <QDebug>
+#include <QDateTime>
 #include <common.h>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -40,10 +41,13 @@ void MainWindow::save() {
 
     qDebug() << "pixelArtCanvas x: " << pixelArtCanvas->rect().x() << endl;
 
-    QRect rect(pixelArtCanvas->x(), pixelArtCanvas->y() + 13, pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
+    int offset = 13;
+    QRect rect(pixelArtCanvas->x(), pixelArtCanvas->y() + offset, pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
 
     QImage image = grab(rect).toImage();
-    QFile file("/Users/gunnarkarlsson/nano_pixel_image.png");
+    qint64 time = QDateTime::currentMSecsSinceEpoch();
+    QString filePath = "/Users/gunnarkarlsson/nano_pixel_image_" +   QString::number(time) + ".png";
+    QFile file(filePath);
     if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         image.save(&file, "PNG");
         qDebug() << "File saved" << endl;
