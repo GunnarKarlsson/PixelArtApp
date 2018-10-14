@@ -15,15 +15,16 @@ public:
     ~MovieScreen();
     void play();
     void stop();
-    void doUpdate();
     void render();
     int getWidth();
     int getHeight();
 
 public slots:
-    void nextFrame();
+    void doUpdate();
+
 
 private:
+    void nextFrame();
     std::vector<PixelImage*> *frames;
     QTimer *timer;
     int frameTimeMs = 30;

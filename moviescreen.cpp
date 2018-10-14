@@ -8,8 +8,10 @@ MovieScreen::MovieScreen(std::vector<PixelImage*> *frames, QWidget *parent) : QG
     setAlignment(Qt::AlignLeft);
     this->frames = frames;
 
+    render();
+
     timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(doUpdate()));
 }
 
 void MovieScreen::doUpdate() {
@@ -36,7 +38,7 @@ void MovieScreen::render() {
 
 void MovieScreen::nextFrame() {
     frameIndex++;
-    if (frameIndex > frames->size()) {
+    if (frameIndex > (frames->size() - 1)) {
         frameIndex = 0;
     }
 }

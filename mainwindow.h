@@ -24,6 +24,8 @@ public:
 
 public slots:
      void save();
+     void play();
+     void stop();
      void addImage();
 
 private:
@@ -36,6 +38,8 @@ private:
 
     QPushButton *saveButton;
     QPushButton *addFrameButton;
+    QPushButton *playButton;
+    QPushButton *stopButton;
     std::vector<PixelImage*> frames;
     int frameIndex = 0;
 };

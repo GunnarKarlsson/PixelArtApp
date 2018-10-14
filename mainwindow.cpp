@@ -53,6 +53,13 @@ MainWindow::MainWindow(QWidget *parent) :
     addFrameButton = new QPushButton("ADD FRAME");
     connect(addFrameButton, SIGNAL (released()),this, SLOT (addImage()));
 
+    playButton = new QPushButton("PLAY");
+    connect(playButton, SIGNAL(released()), this, SLOT(play()));
+
+    stopButton = new QPushButton("STOP");
+    connect(stopButton, SIGNAL(released()), this, SLOT(stop()));
+
+
     //saveButton->setFont(font);
     //QFont f = saveButton->font();
     //f.setPointSize(16);
@@ -63,8 +70,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QLayout *imageListLayout = new QHBoxLayout();
     imageListLayout->addWidget(addFrameButton);
-    imageListLayout->addWidget(new QPushButton("test2"));
-    imageListLayout->addWidget(new QPushButton("test3"));
+    imageListLayout->addWidget(playButton);
+    imageListLayout->addWidget(stopButton);
     imageListLayout->addWidget(movieScreen);
 
     QLayout * layout = new QHBoxLayout();
@@ -107,5 +114,17 @@ void MainWindow::save() {
     }
     else {
         qDebug() << "Can't open file: ";
+    }
+}
+
+void MainWindow::play() {
+    if (movieScreen) {
+        movieScreen->play();
+    }
+}
+
+void MainWindow::stop() {
+    if (movieScreen) {
+        movieScreen->stop();
     }
 }
