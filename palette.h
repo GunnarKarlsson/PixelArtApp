@@ -11,16 +11,17 @@ class Palette : public QGraphicsView
 public:
     Palette(QWidget *parent = 0);
     ~Palette();
+    void render();
+    int getWidth();
+    int getHeight();
+    QColor getSelectedColor();
 
 public slots:
     void mousePressEvent(QMouseEvent * e);
     void mouseReleaseEvent(QMouseEvent * e);
     void mouseDoubleClickEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
-    void render();
-    int getWidth();
-    int getHeight();
-    QColor getSelectedColor();
+
 
 private:
     const int borderSize = 10;

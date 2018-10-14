@@ -21,19 +21,22 @@ ImageSequence::~ImageSequence() {
 }
 
 void ImageSequence::mousePressEvent(QMouseEvent * e) {
-
+    qDebug() << "imageseq mousePressEvent" << endl;
+     int x = e->pos().x();
+     selectionIndex = x / cellSize;
+     qDebug() << "selectionIndex: " << selectionIndex << endl;
 }
 
 void ImageSequence::mouseReleaseEvent(QMouseEvent * e) {
-
+    qDebug() << "imageseq mouseReleaseEvent" << endl;
 }
 
 void ImageSequence::mouseDoubleClickEvent(QMouseEvent * e) {
-
+    qDebug() << "imageseq mouseDoubleClickEvent" << endl;
 }
 
 void ImageSequence::mouseMoveEvent(QMouseEvent * e) {
-
+qDebug() << "imageseq mouseMoveEvent" << endl;
 }
 
 void ImageSequence::update(QColor *color, int selectionIndex) {

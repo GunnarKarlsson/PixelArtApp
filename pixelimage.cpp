@@ -27,7 +27,7 @@ void PixelImage::render(QGraphicsScene *scene, int xPos, int yPos, int cellSize)
         QBrush brush(*color);
         int pixelWidth = cellSize/col_count;
         int pixelHeight = cellSize/row_count;
-        qDebug() << "x * pixelWidth" << x * pixelWidth << endl;
+        //qDebug() << "x * pixelWidth" << x * pixelWidth << endl;
         scene->addRect(QRect((x*pixelWidth) + xPos,(y*pixelHeight),pixelWidth,pixelHeight), noPen, brush);
     }
 }
