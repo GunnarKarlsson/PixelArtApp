@@ -1,19 +1,12 @@
 #include "pixelartcanvas.h"
 #include <QDebug>
 
-PixelArtCanvas::PixelArtCanvas(QWidget *parent) {
+PixelArtCanvas::PixelArtCanvas(std::vector<PixelImage*> &frames, QWidget *parent) {
+    this->frames = frames;
     scene = new QGraphicsScene();
     setScene(scene);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("background: transparent; border: transparent;");
-
-    pixelImage = new PixelImage();
-
-    for (int i = 0; i < (col_count * row_count); i++) {
-        QColor *c = new QColor();
-        c->setNamedColor("#FFF1E8");
-        pixelImage->canvasColors.push_back(c);
-    }
     render(true);
 }
 
@@ -61,7 +54,7 @@ void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
     //qDebug() << "selectionIndex: " << selectionIndex << endl;
 
     QColor selectedColor = palette->getSelectedColor();
-    pixelImage->canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
+    frames[0]->canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
     render(true);
     isMousePressed = true;
 }
@@ -113,7 +106,7 @@ void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
     if (selectionIndex > col_count * row_count) {
         selectionIndex = 0;
     }
-    pixelImage->canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
+    frames[0]->canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
     render(false);
 }
 
@@ -127,17 +120,17 @@ void PixelArtCanvas::render(bool all) {
     QPen noPen(Qt::NoPen);
     QBrush noBrush(Qt::NoBrush);
     if (all) {
-    for (int i = 0; i < pixelImage->canvasColors.size(); i++) {
+    for (int i = 0; i < frames[0]->canvasColors.size(); i++) {
         int x = i % col_count;
         int y = i / row_count;
-        QColor *color = pixelImage->canvasColors[i];
+        QColor *color = frames[0]->canvasColors[i];
         QBrush brush(*color);
         scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
     }
     } else {
         int x = selectionIndex % col_count;
         int y = selectionIndex / row_count;
-        QColor *color = pixelImage->canvasColors[selectionIndex];
+        QColor *color = frames[0]->canvasColors[selectionIndex];
         QBrush brush(*color);
         scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
         if (imageSequence) {

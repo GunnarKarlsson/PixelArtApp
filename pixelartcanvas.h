@@ -12,7 +12,7 @@ class PixelArtCanvas : public QGraphicsView
     Q_OBJECT
 
 public:
-    PixelArtCanvas(QWidget *parent = 0);
+    PixelArtCanvas(std::vector<PixelImage*>&frames, QWidget *parent = 0);
     ~PixelArtCanvas();
 
 public slots:
@@ -34,8 +34,7 @@ private:
     const int row_count = 12;
     const int col_count = 12;
     QGraphicsScene *scene;
-    //std::vector<QColor*> canvasColors;
-    PixelImage *pixelImage;
+    std::vector<PixelImage*> frames;
     Palette *palette;
     ImageSequence *imageSequence;
     bool isMousePressed = false;
