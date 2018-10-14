@@ -12,8 +12,6 @@ ImageSequence::ImageSequence(std::vector<PixelImage*> &frames, QWidget *parent) 
 
     images = frames;
 
-    //images.resize(0);
-    //images.push_back(new PixelImage());
     qDebug() << "images.size() in ctor" << images.size() << endl;
     render(true);
 }

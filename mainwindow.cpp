@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     imageSequence = new ImageSequence(frames);
     imageSequence->setFixedSize(imageSequence->getWidth(), imageSequence->getHeight());
 
-    pixelArtCanvas = new PixelArtCanvas(frames);
+    pixelArtCanvas = new PixelArtCanvas(&frames);
     pixelArtCanvas->setPalette(palette);
     pixelArtCanvas->setImageSequence(imageSequence);
     pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
@@ -74,7 +74,9 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::addImage() {
-    imageSequence->addImage();
+    //imageSequence->addImage();
+    frames.push_back(new PixelImage());
+    imageSequence->render(true);
 }
 
 void MainWindow::save() {
