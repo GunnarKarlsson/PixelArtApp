@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
     pixelArtCanvas->setPalette(palette);
     pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
 
+    imageSequence = new ImageSequence();
+    imageSequence->setFixedSize(imageSequence->getWidth(), imageSequence->getHeight());
+
     saveButton = new QPushButton("SAVE");
     saveButton->setFont(font);
     QFont f = saveButton->font();
@@ -43,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QLayout * layout = new QHBoxLayout();
     mainLayout->addLayout(layout);
+    mainLayout->addWidget(imageSequence);
     mainLayout->addLayout(imageListLayout);
     ui->centralWidget->setLayout(mainLayout);
     layout->addWidget(saveButton);

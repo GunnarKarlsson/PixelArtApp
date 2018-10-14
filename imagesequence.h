@@ -1,14 +1,16 @@
-#ifndef IMAGELIST_H
-#define IMAGELIST_H
+#ifndef IMAGESEQUENCE_H
+#define IMAGESEQUENCE_H
 
+#include <QGraphicsView>
+#include "pixelimage.h"
 
-class ImageList : public QGraphicsView
+class ImageSequence : public QGraphicsView
 {
     Q_OBJECT
 
 public:
-    ImageList(QWidget *parent = 0);
-    ~ImageList();
+    ImageSequence(QWidget *parent = 0);
+    ~ImageSequence();
     void mousePressEvent(QMouseEvent * e);
     void mouseReleaseEvent(QMouseEvent * e);
     void mouseDoubleClickEvent(QMouseEvent * e);
@@ -22,7 +24,7 @@ private:
     const int cellSize = 24;
     int maxLength = 12;
     QGraphicsScene *scene;
-    std::vector<QImage> canvasColors;
+    std::vector<PixelImage*> images;
 };
 
-#endif // IMAGELIST_H
+#endif // IMAGESEQUENCE_H

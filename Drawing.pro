@@ -26,13 +26,17 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     pixelartcanvas.cpp \
-    palette.cpp
+    palette.cpp \
+    imagesequence.cpp \
+    pixelimage.cpp
 
 HEADERS += \
         mainwindow.h \
     pixelartcanvas.h \
     palette.h \
-    common.h
+    common.h \
+    imagesequence.h \
+    pixelimage.h
 
 FORMS += \
         mainwindow.ui

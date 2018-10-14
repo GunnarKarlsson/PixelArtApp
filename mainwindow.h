@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include "palette.h"
 #include "pixelartcanvas.h"
+#include "imagesequence.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +29,7 @@ private:
     QGraphicsScene *scene;
     PixelArtCanvas *pixelArtCanvas;
     Palette *palette;
+    ImageSequence *imageSequence;
     QPushButton *saveButton;
 
 };
