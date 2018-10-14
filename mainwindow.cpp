@@ -47,9 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     movieScreen->setFixedSize(movieScreen->getWidth(), movieScreen->getHeight());
 
     //Add Buttons
-    saveButton = new QPushButton("SAVE");
-    styleButton(saveButton, font);
-    connect(saveButton, SIGNAL (released()),this, SLOT (save()));
+    exportButton = new QPushButton("EXPORT");
+    styleButton(exportButton, font);
+    connect(exportButton, SIGNAL (released()),this, SLOT (doExport()));
 
     addFrameButton = new QPushButton("ADD FRAME");
     styleButton(addFrameButton, font);
@@ -65,10 +65,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
 
+    QLayout *actionBarLayout = new QHBoxLayout();
+    actionBarLayout->addWidget(addFrameButton);
+    actionBarLayout->addWidget(playButton);
+    actionBarLayout->addWidget(stopButton);
+    actionBarLayout->addWidget(exportButton);
+    mainLayout->addLayout(actionBarLayout);
+
     QLayout *imageListLayout = new QHBoxLayout();
-    imageListLayout->addWidget(addFrameButton);
-    imageListLayout->addWidget(playButton);
-    imageListLayout->addWidget(stopButton);
     imageListLayout->addWidget(movieScreen);
 
     QLayout * layout = new QHBoxLayout();
@@ -76,7 +80,6 @@ MainWindow::MainWindow(QWidget *parent) :
     mainLayout->addWidget(imageSequence);
     mainLayout->addLayout(imageListLayout);
     ui->centralWidget->setLayout(mainLayout);
-    layout->addWidget(saveButton);
     layout->addWidget(pixelArtCanvas);
     layout->addWidget(palette);
 }
@@ -103,7 +106,7 @@ void MainWindow::addImage() {
     imageSequence->render(true);
 }
 
-void MainWindow::save() {
+void MainWindow::doExport() {
     qDebug() << "Save()" << endl;
 
     qDebug() << "pixelArtCanvas x: " << pixelArtCanvas->rect().x() << endl;
