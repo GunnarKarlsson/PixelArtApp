@@ -23,6 +23,8 @@ void PixelImage::render(QGraphicsScene *scene, int x, int y, int cellSize) {
         int y = i / row_count;
         QColor *color = canvasColors[i];
         QBrush brush(*color);
-        scene->addRect(QRect((x*cellSize),(y*cellSize),cellSize,cellSize), noPen, brush);
+        int pixelWidth = cellSize/col_count;
+        int pixelHeight = cellSize/row_count;
+        scene->addRect(QRect((x*pixelWidth),(y*pixelHeight),pixelWidth,pixelHeight), noPen, brush);
     }
 }

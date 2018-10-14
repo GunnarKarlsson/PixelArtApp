@@ -4,10 +4,11 @@ ImageSequence::ImageSequence(QWidget *parent) : QGraphicsView(parent){
 
     scene = new QGraphicsScene();
     setScene(scene); setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //setStyleSheet("background: transparent; border: transparent;");
+    setStyleSheet("background: transparent; border: transparent;");
 
     images.push_back(new PixelImage());
     images.push_back((new PixelImage));
+    render(true);
 }
 
 ImageSequence::~ImageSequence() {
