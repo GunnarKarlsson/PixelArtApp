@@ -28,7 +28,8 @@ SOURCES += \
     pixelartcanvas.cpp \
     palette.cpp \
     imagesequence.cpp \
-    pixelimage.cpp
+    pixelimage.cpp \
+    moviescreen.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -36,7 +37,8 @@ HEADERS += \
     palette.h \
     common.h \
     imagesequence.h \
-    pixelimage.h
+    pixelimage.h \
+    moviescreen.h
 
 FORMS += \
         mainwindow.ui
