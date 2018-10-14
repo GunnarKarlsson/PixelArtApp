@@ -27,7 +27,7 @@ private:
     void nextFrame();
     std::vector<PixelImage*> *frames;
     QTimer *timer;
-    int frameTimeMs = 66;
+    int frameTimeMs = 1000;
     QGraphicsScene *scene;
     int frameIndex = 0;
     int cellSize = 200;
