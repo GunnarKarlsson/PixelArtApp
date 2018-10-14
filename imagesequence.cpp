@@ -20,12 +20,19 @@ ImageSequence::~ImageSequence() {
 
 }
 
+void ImageSequence::setPixelArtCanvas(PixelArtCanvas *pac) {
+    this->pac = pac;
+}
+
 void ImageSequence::mousePressEvent(QMouseEvent * e) {
     qDebug() << "imageseq mousePressEvent" << endl;
      int x = e->pos().x();
      selectionIndex = x / cellSize;
      qDebug() << "selectionIndex: " << selectionIndex << endl;
      *frameIndex = selectionIndex;
+     if (pac) {
+         pac->render(true);
+     }
 }
 
 void ImageSequence::mouseReleaseEvent(QMouseEvent * e) {}

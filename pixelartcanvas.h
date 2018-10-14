@@ -7,6 +7,8 @@
 #include "imagesequence.h"
 #include "pixelimage.h"
 
+class ImageSequence;
+
 class PixelArtCanvas : public QGraphicsView
 {
     Q_OBJECT

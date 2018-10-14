@@ -38,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     pixelArtCanvas->setImageSequence(imageSequence);
     pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
 
+    imageSequence->setPixelArtCanvas(pixelArtCanvas);
+
     saveButton = new QPushButton("SAVE");
     connect(saveButton, SIGNAL (released()),this, SLOT (save()));
 

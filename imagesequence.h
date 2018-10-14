@@ -4,6 +4,9 @@
 #include <QGraphicsView>
 #include <QMouseEvent>
 #include "pixelimage.h"
+#include "pixelartcanvas.h"
+
+class PixelArtCanvas;
 
 class ImageSequence : public QGraphicsView
 {
@@ -17,6 +20,7 @@ public:
     int getWidth();
     int getHeight();
     void addImage();
+    void setPixelArtCanvas(PixelArtCanvas *pac);
 
 public slots:
     void mousePressEvent(QMouseEvent * e);
@@ -32,6 +36,7 @@ private:
     QGraphicsScene *scene;
     std::vector<PixelImage*> *images;
     int *frameIndex;
+    PixelArtCanvas *pac;
 };
 
 #endif // IMAGESEQUENCE_H
