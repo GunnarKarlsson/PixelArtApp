@@ -4,8 +4,11 @@
 ImageSequence::ImageSequence(QWidget *parent) : QGraphicsView(parent){
 
     scene = new QGraphicsScene();
-    setScene(scene); setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setStyleSheet("background: transparent; border: transparent;");
+    setScene(scene);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setAlignment(Qt::AlignLeft);
+    //setStyleSheet("background: transparent; border: transparent;");
 
     images.resize(0);
     images.push_back(new PixelImage());
@@ -41,6 +44,8 @@ void ImageSequence::update(QColor *color, int selectionIndex) {
 
 void ImageSequence::render(bool all) {
 
+    qDebug() << "render images.size(): " << images.size() << endl;
+
     for (int i = 0; i < images.size(); i++) {
         PixelImage *p = images[i];
         p->render(scene, i * cellSize, 0, cellSize);
@@ -48,9 +53,14 @@ void ImageSequence::render(bool all) {
 }
 
 int ImageSequence::getWidth() {
-    return images.size() * cellSize;
+    return maxLength * cellSize;
 }
 
 int ImageSequence::getHeight() {
     return cellSize;
+}
+
+void ImageSequence::addImage() {
+     images.push_back(new PixelImage());
+     render(true);
 }

@@ -23,6 +23,7 @@ public:
 
 public slots:
      void save();
+     void addImage();
 
 private:
     Ui::MainWindow *ui;
@@ -31,6 +32,7 @@ private:
     Palette *palette;
     ImageSequence *imageSequence;
     QPushButton *saveButton;
+    QPushButton *addFrameButton;
 
 };
 

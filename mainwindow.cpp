@@ -31,17 +31,21 @@ MainWindow::MainWindow(QWidget *parent) :
     pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
 
     saveButton = new QPushButton("SAVE");
-    saveButton->setFont(font);
-    QFont f = saveButton->font();
-    f.setPointSize(16);
-    saveButton->setFont(f);
-    saveButton->setStyleSheet("background-color: #FFFFFF;");
     connect(saveButton, SIGNAL (released()),this, SLOT (save()));
+
+    addFrameButton = new QPushButton("ADD FRAME");
+    connect(addFrameButton, SIGNAL (released()),this, SLOT (addImage()));
+
+    //saveButton->setFont(font);
+    //QFont f = saveButton->font();
+    //f.setPointSize(16);
+    //saveButton->setFont(f);
+    //saveButton->setStyleSheet("background-color: #FFFFFF;");
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
 
     QLayout *imageListLayout = new QHBoxLayout();
-    imageListLayout->addWidget(new QPushButton("test1"));
+    imageListLayout->addWidget(addFrameButton);
     imageListLayout->addWidget(new QPushButton("test2"));
     imageListLayout->addWidget(new QPushButton("test3"));
 
@@ -59,6 +63,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::addImage() {
+    imageSequence->addImage();
 }
 
 void MainWindow::save() {

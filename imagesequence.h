@@ -19,11 +19,12 @@ public:
     void render(bool all);
     int getWidth();
     int getHeight();
+    void addImage();
 private:
     int selectionIndex = 0;
     const int borderSize = 10;
     const int cellSize = 60;
-    int maxLength = 12;
+    int maxLength = 8;
     QGraphicsScene *scene;
     std::vector<PixelImage*> images;
 };
