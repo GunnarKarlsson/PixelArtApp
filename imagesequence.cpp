@@ -1,4 +1,5 @@
 #include "imagesequence.h"
+#include <QDebug>
 
 ImageSequence::ImageSequence(QWidget *parent) : QGraphicsView(parent){
 
@@ -6,8 +7,9 @@ ImageSequence::ImageSequence(QWidget *parent) : QGraphicsView(parent){
     setScene(scene); setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("background: transparent; border: transparent;");
 
+    images.resize(0);
     images.push_back(new PixelImage());
-    images.push_back((new PixelImage));
+    qDebug() << "images.size() in ctor" << images.size() << endl;
     render(true);
 }
 
@@ -31,13 +33,16 @@ void ImageSequence::mouseMoveEvent(QMouseEvent * e) {
 
 }
 
+void ImageSequence::update(QColor *color, int selectionIndex) {
+    qDebug() << "images.size() in update()" << images.size() << endl;
+}
+
 void ImageSequence::render(bool all) {
 
     for (int i = 0; i < images.size(); i++) {
         PixelImage *p = images[i];
         p->render(scene, i * cellSize, 0, cellSize);
     }
-
 }
 
 int ImageSequence::getWidth() {

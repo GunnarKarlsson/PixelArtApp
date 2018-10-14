@@ -22,12 +22,13 @@ MainWindow::MainWindow(QWidget *parent) :
     palette = new Palette();
     palette->setFixedSize(palette->getWidth(), palette->getHeight());
 
-    pixelArtCanvas = new PixelArtCanvas();
-    pixelArtCanvas->setPalette(palette);
-    pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
-
     imageSequence = new ImageSequence();
     imageSequence->setFixedSize(imageSequence->getWidth(), imageSequence->getHeight());
+
+    pixelArtCanvas = new PixelArtCanvas();
+    pixelArtCanvas->setPalette(palette);
+    pixelArtCanvas->setImageSequence(imageSequence);
+    pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
 
     saveButton = new QPushButton("SAVE");
     saveButton->setFont(font);

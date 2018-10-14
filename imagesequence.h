@@ -15,6 +15,7 @@ public:
     void mouseReleaseEvent(QMouseEvent * e);
     void mouseDoubleClickEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
+    void update(QColor *color, int selectionIndex);
     void render(bool all);
     int getWidth();
     int getHeight();
