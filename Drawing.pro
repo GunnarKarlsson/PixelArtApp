@@ -56,4 +56,5 @@ DISTFILES += \
     Fipps-Regular.otf \
     04B_30__.TTF \
     about.gif \
-    Pixeled.ttf
+    Pixeled.ttf \
+    json_example

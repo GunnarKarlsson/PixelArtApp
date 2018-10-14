@@ -1,0 +1,27 @@
+{
+  "id":"some id"
+  "name":"some name"
+  "created_date":1234,
+  "modified_date":5678,
+  "frame_count":2,
+  "row_count":12,
+  "col_count":12,
+  "frames": [
+    {
+      "index": 0,
+      "colors": [
+        "#FFFFFF",
+        "#000000",
+        "#888888"
+      ]
+    },
+    {
+      "index": 1,
+      "colors": [
+        "#FFFFFF",
+        "#000000",
+        "#888888"
+      ]
+    }
+  ]
+}
