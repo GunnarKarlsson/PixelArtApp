@@ -10,7 +10,7 @@ class ImageSequence : public QGraphicsView
     Q_OBJECT
 
 public:
-    ImageSequence(std::vector<PixelImage*> &frames, QWidget *parent = 0);
+    ImageSequence(std::vector<PixelImage*> *frames, QWidget *parent = 0);
     ~ImageSequence();
     void update(QColor *color, int selectionIndex);
     void render(bool all);
@@ -30,7 +30,7 @@ private:
     const int cellSize = 60;
     int maxLength = 8;
     QGraphicsScene *scene;
-    std::vector<PixelImage*> images;
+    std::vector<PixelImage*> *images;
 };
 
 #endif // IMAGESEQUENCE_H

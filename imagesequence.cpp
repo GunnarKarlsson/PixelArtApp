@@ -1,7 +1,7 @@
 #include "imagesequence.h"
 #include <QDebug>
 
-ImageSequence::ImageSequence(std::vector<PixelImage*> &frames, QWidget *parent) : QGraphicsView(parent){
+ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, QWidget *parent) : QGraphicsView(parent){
 
     scene = new QGraphicsScene();
     setScene(scene);
@@ -12,7 +12,7 @@ ImageSequence::ImageSequence(std::vector<PixelImage*> &frames, QWidget *parent) 
 
     images = frames;
 
-    qDebug() << "images.size() in ctor" << images.size() << endl;
+    qDebug() << "images.size() in ctor" << images->size() << endl;
     render(true);
 }
 
@@ -38,9 +38,9 @@ void ImageSequence::update(QColor *color, int selectionIndex) {
 }
 
 void ImageSequence::render(bool all) {
-    qDebug() << "render images.size(): " << images.size() << endl;
-    for (int i = 0; i < images.size(); i++) {
-        PixelImage *p = images[i];
+    qDebug() << "render images.size(): " << images->size() << endl;
+    for (int i = 0; i < images->size(); i++) {
+        PixelImage *p = images->at(i);
         p->render(scene, i * cellSize, 0, cellSize);
     }
 }
@@ -54,6 +54,6 @@ int ImageSequence::getHeight() {
 }
 
 void ImageSequence::addImage() {
-     images.push_back(new PixelImage());
+     images->push_back(new PixelImage());
      render(true);
 }
