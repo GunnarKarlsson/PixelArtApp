@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include "palette.h"
 #include "imagesequence.h"
+#include "pixelimage.h"
 
 class PixelArtCanvas : public QGraphicsView
 {
@@ -24,6 +25,7 @@ public slots:
     int getHeight();
     void setPalette(Palette *palette);
     void setImageSequence(ImageSequence *sequence);
+    void setImageData(std::vector<PixelImage*> &imageData);
 
 private:
     int selectionIndex = 0;
@@ -32,7 +34,8 @@ private:
     const int row_count = 12;
     const int col_count = 12;
     QGraphicsScene *scene;
-    std::vector<QColor*> canvasColors;
+    //std::vector<QColor*> canvasColors;
+    PixelImage *pixelImage;
     Palette *palette;
     ImageSequence *imageSequence;
     bool isMousePressed = false;

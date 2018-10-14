@@ -33,7 +33,7 @@ private:
     ImageSequence *imageSequence;
     QPushButton *saveButton;
     QPushButton *addFrameButton;
-
+    std::vector<PixelImage*> pixelImages;
 };
 
 #endif // MAINWINDOW_H
