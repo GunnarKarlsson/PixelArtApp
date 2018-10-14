@@ -22,7 +22,7 @@ public:
 private:
     int selectionIndex = 0;
     const int borderSize = 10;
-    const int cellSize = 24;
+    const int cellSize = 60;
     int maxLength = 12;
     QGraphicsScene *scene;
     std::vector<PixelImage*> images;
