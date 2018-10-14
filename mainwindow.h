@@ -7,6 +7,7 @@
 #include "palette.h"
 #include "pixelartcanvas.h"
 #include "imagesequence.h"
+#include "moviescreen.h"
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +32,8 @@ private:
     PixelArtCanvas *pixelArtCanvas;
     Palette *palette;
     ImageSequence *imageSequence;
+    MovieScreen *movieScreen;
+
     QPushButton *saveButton;
     QPushButton *addFrameButton;
     std::vector<PixelImage*> frames;

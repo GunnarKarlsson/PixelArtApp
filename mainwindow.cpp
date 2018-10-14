@@ -11,17 +11,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    setFixedSize(680, 480);
+    setFixedSize(680, 680);
 
     ui->setupUi(this);
 
+    //Load resources
     int id = QFontDatabase::addApplicationFont(":/Font/Fipps-Regular.otf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family);
 
-    palette = new Palette();
-    palette->setFixedSize(palette->getWidth(), palette->getHeight());
-
+    //Add initial Data
     PixelImage *pixelImage = new PixelImage();
     for (int i = 0; i < (12 * 12); i++) { //TODO; remove hardcoded size
         QColor *c = new QColor();
@@ -29,6 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
         pixelImage->canvasColors.push_back(c);
     }
     frames.push_back(pixelImage);
+
+    //add QGraphicViews
+    palette = new Palette();
+    palette->setFixedSize(palette->getWidth(), palette->getHeight());
 
     imageSequence = new ImageSequence(&frames, &frameIndex);
     imageSequence->setFixedSize(imageSequence->getWidth(), imageSequence->getHeight());
@@ -40,6 +43,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     imageSequence->setPixelArtCanvas(pixelArtCanvas);
 
+    movieScreen = new MovieScreen(&frames);
+    movieScreen->setFixedSize(movieScreen->getWidth(), movieScreen->getHeight());
+
+    //Add Buttons
     saveButton = new QPushButton("SAVE");
     connect(saveButton, SIGNAL (released()),this, SLOT (save()));
 
@@ -58,6 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
     imageListLayout->addWidget(addFrameButton);
     imageListLayout->addWidget(new QPushButton("test2"));
     imageListLayout->addWidget(new QPushButton("test3"));
+    imageListLayout->addWidget(movieScreen);
 
     QLayout * layout = new QHBoxLayout();
     mainLayout->addLayout(layout);
