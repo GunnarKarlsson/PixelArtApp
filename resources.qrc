@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/Font">
         <file>Fipps-Regular.otf</file>
+        <file>04B_30__.TTF</file>
+        <file>Pixeled.ttf</file>
     </qresource>
 </RCC>

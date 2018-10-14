@@ -53,4 +53,7 @@ RESOURCES += \
 
 DISTFILES += \
     pheist_license_freeware.pdf \
-    Fipps-Regular.otf
+    Fipps-Regular.otf \
+    04B_30__.TTF \
+    about.gif \
+    Pixeled.ttf

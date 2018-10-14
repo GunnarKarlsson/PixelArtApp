@@ -29,6 +29,7 @@ public slots:
      void addImage();
 
 private:
+    void styleButton(QPushButton *button, QFont &font);
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     PixelArtCanvas *pixelArtCanvas;

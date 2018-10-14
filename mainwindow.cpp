@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Load resources
-    int id = QFontDatabase::addApplicationFont(":/Font/Fipps-Regular.otf");
+    int id = QFontDatabase::addApplicationFont(":/Font/Pixeled.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family);
 
@@ -48,23 +48,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Add Buttons
     saveButton = new QPushButton("SAVE");
+    styleButton(saveButton, font);
     connect(saveButton, SIGNAL (released()),this, SLOT (save()));
 
     addFrameButton = new QPushButton("ADD FRAME");
+    styleButton(addFrameButton, font);
     connect(addFrameButton, SIGNAL (released()),this, SLOT (addImage()));
 
     playButton = new QPushButton("PLAY");
+    styleButton(playButton, font);
     connect(playButton, SIGNAL(released()), this, SLOT(play()));
 
     stopButton = new QPushButton("STOP");
+    styleButton(stopButton, font);
     connect(stopButton, SIGNAL(released()), this, SLOT(stop()));
-
-
-    //saveButton->setFont(font);
-    //QFont f = saveButton->font();
-    //f.setPointSize(16);
-    //saveButton->setFont(f);
-    //saveButton->setStyleSheet("background-color: #FFFFFF;");
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
 
@@ -82,6 +79,14 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->addWidget(saveButton);
     layout->addWidget(pixelArtCanvas);
     layout->addWidget(palette);
+}
+
+void MainWindow::styleButton(QPushButton *button, QFont &font) {
+    button->setFont(font);
+    QFont f = button->font();
+    f.setPointSize(16);
+    button->setFont(f);
+    button->setStyleSheet("background: transparent; color: #FFFFFF;");
 }
 
 
