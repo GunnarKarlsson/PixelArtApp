@@ -12,7 +12,7 @@ class PixelArtCanvas : public QGraphicsView
     Q_OBJECT
 
 public:
-    PixelArtCanvas(std::vector<PixelImage*> *frames, QWidget *parent = 0);
+    PixelArtCanvas(std::vector<PixelImage*> *frames, int *frameIndex, QWidget *parent = 0);
     ~PixelArtCanvas();
 
 public slots:
@@ -39,6 +39,7 @@ private:
     bool isMousePressed = false;
     int lastMousePosX = 0;
     int lastMousePosY = 0;
+    int *frameIndex;
 };
 
 #endif // PIXELARTCANVAS_H

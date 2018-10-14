@@ -1,8 +1,7 @@
 #include "imagesequence.h"
 #include <QDebug>
 
-ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, QWidget *parent) : QGraphicsView(parent){
-
+ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, QWidget *parent) : QGraphicsView(parent){
     scene = new QGraphicsScene();
     setScene(scene);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -10,7 +9,8 @@ ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, QWidget *parent) 
     setAlignment(Qt::AlignLeft);
     //setStyleSheet("background: transparent; border: transparent;");
 
-    images = frames;
+    this->images = frames;
+    this->frameIndex = frameIndex;
 
     qDebug() << "images.size() in ctor" << images->size() << endl;
     render(true);
@@ -25,6 +25,7 @@ void ImageSequence::mousePressEvent(QMouseEvent * e) {
      int x = e->pos().x();
      selectionIndex = x / cellSize;
      qDebug() << "selectionIndex: " << selectionIndex << endl;
+     *frameIndex = selectionIndex;
 }
 
 void ImageSequence::mouseReleaseEvent(QMouseEvent * e) {}

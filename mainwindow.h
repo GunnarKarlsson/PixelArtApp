@@ -34,6 +34,7 @@ private:
     QPushButton *saveButton;
     QPushButton *addFrameButton;
     std::vector<PixelImage*> frames;
+    int frameIndex = 0;
 };
 
 #endif // MAINWINDOW_H
