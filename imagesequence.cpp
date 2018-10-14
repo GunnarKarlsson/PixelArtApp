@@ -35,6 +35,8 @@ void ImageSequence::mouseMoveEvent(QMouseEvent * e) {
 
 void ImageSequence::update(QColor *color, int selectionIndex) {
     qDebug() << "images.size() in update()" << images.size() << endl;
+    images.at(0)->update(color, selectionIndex);
+    render(true);
 }
 
 void ImageSequence::render(bool all) {
