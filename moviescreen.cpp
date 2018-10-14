@@ -32,6 +32,7 @@ void MovieScreen::stop() {
 }
 
 void MovieScreen::render() {
+    scene->clear();
     PixelImage *p = frames->at(frameIndex);
     p->render(scene, 0, 0, cellSize);
 }

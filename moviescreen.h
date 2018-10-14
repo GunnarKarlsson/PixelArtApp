@@ -30,7 +30,7 @@ private:
     int frameTimeMs = 33;
     QGraphicsScene *scene;
     int frameIndex = 0;
-    int cellSize = 100;
+    int cellSize = 200;
 };
 
 #endif // MOVIESCREEN_H
