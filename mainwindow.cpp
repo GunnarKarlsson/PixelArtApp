@@ -22,11 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     palette = new Palette();
     palette->setFixedSize(palette->getWidth(), palette->getHeight());
 
-    imageSequence = new ImageSequence();
-    imageSequence->setFixedSize(imageSequence->getWidth(), imageSequence->getHeight());
-
     PixelImage *pixelImage = new PixelImage();
-
     for (int i = 0; i < (12 * 12); i++) { //TODO; remove hardcoded size
         QColor *c = new QColor();
         c->setNamedColor("#FFF1E8");
@@ -34,8 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     frames.push_back(pixelImage);
 
-    pixelArtCanvas = new PixelArtCanvas(frames);
+    imageSequence = new ImageSequence(frames);
+    imageSequence->setFixedSize(imageSequence->getWidth(), imageSequence->getHeight());
 
+    pixelArtCanvas = new PixelArtCanvas(frames);
     pixelArtCanvas->setPalette(palette);
     pixelArtCanvas->setImageSequence(imageSequence);
     pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());

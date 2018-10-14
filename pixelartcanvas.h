@@ -25,7 +25,6 @@ public slots:
     int getHeight();
     void setPalette(Palette *palette);
     void setImageSequence(ImageSequence *sequence);
-    void setImageData(std::vector<PixelImage*> &imageData);
 
 private:
     int selectionIndex = 0;

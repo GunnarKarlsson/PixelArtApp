@@ -10,7 +10,7 @@ class ImageSequence : public QGraphicsView
     Q_OBJECT
 
 public:
-    ImageSequence(QWidget *parent = 0);
+    ImageSequence(std::vector<PixelImage*> &frames, QWidget *parent = 0);
     ~ImageSequence();
     void update(QColor *color, int selectionIndex);
     void render(bool all);

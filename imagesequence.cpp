@@ -1,7 +1,7 @@
 #include "imagesequence.h"
 #include <QDebug>
 
-ImageSequence::ImageSequence(QWidget *parent) : QGraphicsView(parent){
+ImageSequence::ImageSequence(std::vector<PixelImage*> &frames, QWidget *parent) : QGraphicsView(parent){
 
     scene = new QGraphicsScene();
     setScene(scene);
@@ -10,8 +10,10 @@ ImageSequence::ImageSequence(QWidget *parent) : QGraphicsView(parent){
     setAlignment(Qt::AlignLeft);
     //setStyleSheet("background: transparent; border: transparent;");
 
-    images.resize(0);
-    images.push_back(new PixelImage());
+    images = frames;
+
+    //images.resize(0);
+    //images.push_back(new PixelImage());
     qDebug() << "images.size() in ctor" << images.size() << endl;
     render(true);
 }
@@ -27,28 +29,18 @@ void ImageSequence::mousePressEvent(QMouseEvent * e) {
      qDebug() << "selectionIndex: " << selectionIndex << endl;
 }
 
-void ImageSequence::mouseReleaseEvent(QMouseEvent * e) {
-    qDebug() << "imageseq mouseReleaseEvent" << endl;
-}
+void ImageSequence::mouseReleaseEvent(QMouseEvent * e) {}
 
-void ImageSequence::mouseDoubleClickEvent(QMouseEvent * e) {
-    qDebug() << "imageseq mouseDoubleClickEvent" << endl;
-}
+void ImageSequence::mouseDoubleClickEvent(QMouseEvent * e) {}
 
-void ImageSequence::mouseMoveEvent(QMouseEvent * e) {
-qDebug() << "imageseq mouseMoveEvent" << endl;
-}
+void ImageSequence::mouseMoveEvent(QMouseEvent * e) {}
 
 void ImageSequence::update(QColor *color, int selectionIndex) {
-    qDebug() << "images.size() in update()" << images.size() << endl;
-    images.at(0)->update(color, selectionIndex);
     render(true);
 }
 
 void ImageSequence::render(bool all) {
-
     qDebug() << "render images.size(): " << images.size() << endl;
-
     for (int i = 0; i < images.size(); i++) {
         PixelImage *p = images[i];
         p->render(scene, i * cellSize, 0, cellSize);

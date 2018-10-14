@@ -10,10 +10,6 @@ PixelArtCanvas::PixelArtCanvas(std::vector<PixelImage*> &frames, QWidget *parent
     render(true);
 }
 
-void PixelArtCanvas::setImageData(std::vector<PixelImage*> &imageData) {
-
-}
-
 void PixelArtCanvas::setPalette(Palette *p) {
     palette = p;
 }
