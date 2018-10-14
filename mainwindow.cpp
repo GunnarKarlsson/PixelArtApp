@@ -5,6 +5,9 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QFontDatabase>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
 #include <common.h>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -63,12 +66,17 @@ MainWindow::MainWindow(QWidget *parent) :
     styleButton(stopButton, font);
     connect(stopButton, SIGNAL(released()), this, SLOT(stop()));
 
+    saveButton = new QPushButton("SAVE");
+    styleButton(saveButton, font);
+    connect(saveButton, SIGNAL(released()), this, SLOT(save()));
+
     QVBoxLayout *mainLayout = new QVBoxLayout();
 
     QLayout *actionBarLayout = new QHBoxLayout();
     actionBarLayout->addWidget(addFrameButton);
     actionBarLayout->addWidget(playButton);
     actionBarLayout->addWidget(stopButton);
+    actionBarLayout->addWidget(saveButton);
     actionBarLayout->addWidget(exportButton);
     mainLayout->addLayout(actionBarLayout);
 
@@ -137,4 +145,26 @@ void MainWindow::stop() {
     if (movieScreen) {
         movieScreen->stop();
     }
+}
+
+void MainWindow::save() {
+    qDebug() << "save()" << endl;
+
+    QFile saveFile(QStringLiteral("save.json"));
+
+    if (!saveFile.open(QIODevice::WriteOnly)) {
+        qWarning("Couldn't open save file.");
+        return;
+    }
+
+    QJsonObject jsonObject;
+    write(jsonObject);
+    QJsonDocument saveDoc(jsonObject);
+    saveFile.write(saveDoc.toJson());
+}
+
+void MainWindow::write(QJsonObject &json) {
+    //json["name"] = ...;
+    //json["frame_count"] = ;
+    //json["classType"] = ...;
 }

@@ -27,9 +27,11 @@ public slots:
      void play();
      void stop();
      void addImage();
+     void save();
 
 private:
     void styleButton(QPushButton *button, QFont &font);
+    void write(QJsonObject &json);
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     PixelArtCanvas *pixelArtCanvas;
@@ -41,6 +43,7 @@ private:
     QPushButton *addFrameButton;
     QPushButton *playButton;
     QPushButton *stopButton;
+    QPushButton *saveButton;
     std::vector<PixelImage*> frames;
     int frameIndex = 0;
 };
