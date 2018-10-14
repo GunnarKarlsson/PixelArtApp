@@ -9,6 +9,17 @@ PixelImage::PixelImage() {
     }
 }
 
+PixelImage::PixelImage(const PixelImage &other) {
+
+    std::vector<QColor*> colors;
+
+    for (int i = 0; i < other.canvasColors.size(); i++) {
+        colors.push_back(new QColor(other.canvasColors.at(i)->name()));
+    }
+
+    this->canvasColors.swap(colors);
+}
+
 PixelImage::~PixelImage() {
 
 }

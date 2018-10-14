@@ -92,7 +92,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::addImage() {
     //imageSequence->addImage();
-    frames.push_back(new PixelImage());
+
+    PixelImage * currentImage = frames[frameIndex];
+    frames.push_back(new PixelImage(*currentImage));
     imageSequence->render(true);
 }
 

@@ -8,6 +8,7 @@ class PixelImage
 
 public:
     PixelImage();
+    PixelImage(const PixelImage &other);
     ~PixelImage();
     void update(QColor *color, int index);
     void render(QGraphicsScene *, int x, int y, int cellSize);
