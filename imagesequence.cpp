@@ -5,9 +5,9 @@ ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, 
     scene = new QGraphicsScene();
     setScene(scene);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setAlignment(Qt::AlignLeft);
-    //setStyleSheet("background: transparent; border: transparent;");
+    setStyleSheet("background: transparent; border: transparent;");
 
     this->images = frames;
     this->frameIndex = frameIndex;
@@ -33,6 +33,7 @@ void ImageSequence::mousePressEvent(QMouseEvent * e) {
      if (pac) {
          pac->render(true);
      }
+     render(true);
 }
 
 void ImageSequence::mouseReleaseEvent(QMouseEvent * e) {}
@@ -51,6 +52,12 @@ void ImageSequence::render(bool all) {
         PixelImage *p = images->at(i);
         p->render(scene, i * cellSize, 0, cellSize);
     }
+    QPen selectionPen("#000000");
+    selectionPen.setWidth(4);
+    selectionPen.setCapStyle(Qt::SquareCap);
+    selectionPen.setJoinStyle(Qt::MiterJoin);
+    QBrush noBrush(Qt::NoBrush);
+    scene->addRect(QRect(selectionIndex * cellSize, 0, cellSize, cellSize), selectionPen, noBrush);
 }
 
 int ImageSequence::getWidth() {
