@@ -10,6 +10,14 @@ Palette::Palette(QWidget *parent) {
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("background: transparent; border: transparent;");
 
+    noPen = new QPen(Qt::NoPen);
+    noBrush = new QBrush(Qt::NoBrush);
+
+    selectionPen = new QPen("#FFF0EA");
+    selectionPen->setWidth(5);
+    selectionPen->setCapStyle(Qt::SquareCap);
+    selectionPen->setJoinStyle(Qt::MiterJoin);
+
     std::vector<QString> colors =
     {"#000000","#1D2B52","#7E2553","#008651",
      "#AB5135","#5F564F","#C2C3C7","#FFF1E8",
@@ -80,14 +88,6 @@ void Palette::mouseMoveEvent(QMouseEvent * e) {
 }
 
 void Palette::render() {
-    QPen noPen(Qt::NoPen);
-    QBrush noBrush(Qt::NoBrush);
-
-    QPen selectionPen("#FFF0EA");
-    selectionPen.setWidth(5);
-    selectionPen.setCapStyle(Qt::SquareCap);
-    selectionPen.setJoinStyle(Qt::MiterJoin);
-
     QPen borderPen("#000000");
     borderPen.setWidth(10);
     borderPen.setCapStyle(Qt::SquareCap);
@@ -100,12 +100,12 @@ void Palette::render() {
         int y = i / row_count;
         QColor *color = paletteColors[i];
         QBrush brush(*color);
-        scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
+        scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), *noPen, brush);
     }
 
     int selectionX = selectionIndex % col_count;
     int selectionY = selectionIndex / row_count;
 
-    scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), borderPen, noBrush);
-    scene->addRect(QRect((selectionX*cellSize) + borderSize/2, (selectionY*cellSize) + borderSize/2, cellSize, cellSize), selectionPen, noBrush);
+    scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), borderPen, *noBrush);
+    scene->addRect(QRect((selectionX*cellSize) + borderSize/2, (selectionY*cellSize) + borderSize/2, cellSize, cellSize), *selectionPen, *noBrush);
 }

@@ -3,6 +3,8 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMouseEvent>
+#include <QPen>
+#include <QBrush>
 
 class Palette : public QGraphicsView
 {
@@ -31,6 +33,11 @@ private:
     QGraphicsScene *scene;
     std::vector<QColor*> paletteColors;
     int selectionIndex = 0;
+    QPen *noPen;
+    QPen *borderPen;
+    QPen *selectionPen;
+
+    QBrush *noBrush;
 };
 
 #endif // PALETTE_H
