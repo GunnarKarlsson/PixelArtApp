@@ -23,14 +23,42 @@ MainWindow::MainWindow(QWidget *parent) :
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family);
 
-    //Add initial Data
-    PixelImage *pixelImage = new PixelImage();
-    for (int i = 0; i < (12 * 12); i++) { //TODO; remove hardcoded size
-        QColor *c = new QColor();
-        c->setNamedColor("#FFF1E8");
-        pixelImage->canvasColors.push_back(c);
+    QString name = "frames_save.json";
+
+    QFile jsonFile(name);
+    jsonFile.open(QFile::ReadOnly);
+    QString s = jsonFile.readAll();
+    qDebug() << "opened file: " << s << endl;
+
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(s.toUtf8());
+    QJsonObject jsonObject = jsonResponse.object();
+    QJsonArray jsonFramesArray = jsonObject["frames"].toArray();
+    qDebug() << "frames read from file: " << jsonFramesArray.size() << endl;
+
+    if (jsonFramesArray.size() == 0) {
+        //Add initial Data
+        PixelImage *pixelImage = new PixelImage();
+        for (int i = 0; i < (12 * 12); i++) { //TODO; remove hardcoded size
+            QColor *c = new QColor();
+            c->setNamedColor("#FFF1E8");
+            pixelImage->canvasColors.push_back(c);
+        }
+        frames.push_back(pixelImage);
+    } else {
+        for (int i = 0; i < jsonFramesArray.size(); i++) {
+            QJsonObject jsonObj = jsonFramesArray[i].toObject();
+            QJsonArray jsonColors = jsonObj["colors"].toArray();
+            PixelImage *pixelImage = new PixelImage();
+            pixelImage->canvasColors.clear();
+            for (int i = 0; i < (12 * 12); i++) { //TODO; remove hardcoded size
+                QColor *c = new QColor();
+                qDebug() << jsonColors[i].toString() << endl;
+                c->setNamedColor(jsonColors[i].toString());
+                pixelImage->canvasColors.push_back(c);
+            }
+            frames.push_back(pixelImage);
+        }
     }
-    frames.push_back(pixelImage);
 
     //add QGraphicViews
     palette = new Palette();
@@ -163,7 +191,6 @@ void MainWindow::save() {
 
     QJsonObject jsonObject;
     write(jsonObject);
-    //QJsonDocument doc(jsonObject);
 
     QJsonDocument doc(jsonObject);
     QString strJson(doc.toJson(QJsonDocument::Compact));
@@ -172,12 +199,6 @@ void MainWindow::save() {
 
     QTextStream stream( &file );
     stream << strJson << endl;
-
-
-    QFile jsonFile(name);
-        jsonFile.open(QFile::ReadOnly);
-    QString s = jsonFile.readAll();
-    qDebug() << "opened file: " << s << endl;
 }
 
 void MainWindow::write(QJsonObject &json) {
