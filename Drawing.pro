@@ -52,9 +52,5 @@ RESOURCES += \
     resources.qrc
 
 DISTFILES += \
-    pheist_license_freeware.pdf \
-    Fipps-Regular.otf \
-    04B_30__.TTF \
-    about.gif \
     Pixeled.ttf \
     json_example
