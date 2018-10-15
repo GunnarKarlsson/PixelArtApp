@@ -108,7 +108,6 @@ void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
 }
 
 void PixelArtCanvas::render(bool all) {
-
     QPen borderPen("#000000");
     borderPen.setWidth(10);
     borderPen.setCapStyle(Qt::SquareCap);
@@ -117,13 +116,14 @@ void PixelArtCanvas::render(bool all) {
     QPen noPen(Qt::NoPen);
     QBrush noBrush(Qt::NoBrush);
     if (all) {
-    for (int i = 0; i < frames->at(*frameIndex)->canvasColors.size(); i++) {
-        int x = i % col_count;
-        int y = i / row_count;
-        QColor *color = frames->at(*frameIndex)->canvasColors[i];
-        QBrush brush(*color);
-        scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
-    }
+        scene->clear();
+        for (int i = 0; i < frames->at(*frameIndex)->canvasColors.size(); i++) {
+            int x = i % col_count;
+            int y = i / row_count;
+            QColor *color = frames->at(*frameIndex)->canvasColors[i];
+            QBrush brush(*color);
+            scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
+        }
     } else {
         int x = selectionIndex % col_count;
         int y = selectionIndex / row_count;

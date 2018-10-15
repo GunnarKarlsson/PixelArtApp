@@ -24,7 +24,12 @@ ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, 
 }
 
 ImageSequence::~ImageSequence() {
-
+    for (int i = (images->size() - 1); i == 0; --i) {
+        PixelImage * p = images->at(i);
+        delete p;
+    }
+    delete selectionPen;
+    delete noBrush;
 }
 
 void ImageSequence::setPixelArtCanvas(PixelArtCanvas *pac) {
@@ -66,8 +71,6 @@ void ImageSequence::render(bool all) {
         PixelImage *p = images->at(selectionIndex);
         p->render(scene, selectionIndex * cellSize, 0, cellSize);
         scene->addRect(QRect(selectionIndex * cellSize, 0, cellSize, cellSize), *selectionPen, *noBrush);
-
-        qDebug() << scene->children().size() << endl;
     }
 }
 
