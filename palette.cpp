@@ -18,6 +18,11 @@ Palette::Palette(QWidget *parent) {
     selectionPen->setCapStyle(Qt::SquareCap);
     selectionPen->setJoinStyle(Qt::MiterJoin);
 
+    borderPen = new QPen("#000000");
+    borderPen->setWidth(10);
+    borderPen->setCapStyle(Qt::SquareCap);
+    borderPen->setJoinStyle(Qt::MiterJoin);
+
     std::vector<QString> colors =
     {"#000000","#1D2B52","#7E2553","#008651",
      "#AB5135","#5F564F","#C2C3C7","#FFF1E8",
@@ -88,10 +93,8 @@ void Palette::mouseMoveEvent(QMouseEvent * e) {
 }
 
 void Palette::render() {
-    QPen borderPen("#000000");
-    borderPen.setWidth(10);
-    borderPen.setCapStyle(Qt::SquareCap);
-    borderPen.setJoinStyle(Qt::MiterJoin);
+
+    scene->clear();
 
     qDebug() << "border: "<< borderSize << endl;
 
@@ -106,6 +109,6 @@ void Palette::render() {
     int selectionX = selectionIndex % col_count;
     int selectionY = selectionIndex / row_count;
 
-    scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), borderPen, *noBrush);
+    scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), *borderPen, *noBrush);
     scene->addRect(QRect((selectionX*cellSize) + borderSize/2, (selectionY*cellSize) + borderSize/2, cellSize, cellSize), *selectionPen, *noBrush);
 }
