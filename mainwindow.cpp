@@ -150,21 +150,53 @@ void MainWindow::stop() {
 void MainWindow::save() {
     qDebug() << "save()" << endl;
 
-    QFile saveFile(QStringLiteral("save.json"));
+    QString name = "frames_save.json";
 
-    if (!saveFile.open(QIODevice::WriteOnly)) {
-        qWarning("Couldn't open save file.");
+    QFile file(name);
+
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Couldn't open save file." << endl;
         return;
+    } else {
+        qDebug() << "file opened";
     }
 
     QJsonObject jsonObject;
     write(jsonObject);
-    QJsonDocument saveDoc(jsonObject);
-    saveFile.write(saveDoc.toJson());
+    //QJsonDocument doc(jsonObject);
+
+    QJsonDocument doc(jsonObject);
+    QString strJson(doc.toJson(QJsonDocument::Compact));
+
+    qDebug() << "out: " << strJson << endl;
+
+    QTextStream stream( &file );
+    stream << strJson << endl;
+
+
+    QFile jsonFile(name);
+        jsonFile.open(QFile::ReadOnly);
+    QString s = jsonFile.readAll();
+    qDebug() << "opened file: " << s << endl;
 }
 
 void MainWindow::write(QJsonObject &json) {
-    //json["name"] = ...;
-    //json["frame_count"] = ;
-    //json["classType"] = ...;
+    json["id"] = "id";
+    json["frame_count"] = (int)frames.size();
+    json["created_date"] = "some_created_date";
+    json["row_count"] = 12;
+    json["row_count"] = 12;
+    QJsonArray framesArray;
+    for (int i = 0; i < frames.size(); i++) {
+        QJsonObject jsonFrame;
+        jsonFrame["index"] = i;
+        QJsonArray jsonColors;
+        for (int j = 0; j < frames[i]->canvasColors.size(); j++) {
+            QColor *color = frames[i]->canvasColors[j];
+            jsonColors.append(QJsonValue(color->name()));
+        }
+        jsonFrame["colors"] =  jsonColors;
+        framesArray.append(jsonFrame);
+    }
+    json["frames"] =  framesArray;
 }
