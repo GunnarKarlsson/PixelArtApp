@@ -54,6 +54,9 @@ void ImageSequence::update(QColor *color, int selectionIndex) {
 }
 
 void ImageSequence::render(bool all) {
+
+    scene->clear();
+
     qDebug() << "render images.size(): " << images->size() << endl;
     for (int i = 0; i < images->size(); i++) {
         PixelImage *p = images->at(i);
