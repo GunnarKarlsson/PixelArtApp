@@ -50,20 +50,25 @@ void ImageSequence::mouseDoubleClickEvent(QMouseEvent * e) {}
 void ImageSequence::mouseMoveEvent(QMouseEvent * e) {}
 
 void ImageSequence::update(QColor *color, int selectionIndex) {
-    render(true);
+    render(false);
 }
 
 void ImageSequence::render(bool all) {
+    if (all) {
+        scene->clear();
+        qDebug() << "render images.size(): " << images->size() << endl;
+        for (int i = 0; i < images->size(); i++) {
+            PixelImage *p = images->at(i);
+            p->render(scene, i * cellSize, 0, cellSize);
+        }
+        scene->addRect(QRect(selectionIndex * cellSize, 0, cellSize, cellSize), *selectionPen, *noBrush);
+    } else {
+        PixelImage *p = images->at(selectionIndex);
+        p->render(scene, selectionIndex * cellSize, 0, cellSize);
+        scene->addRect(QRect(selectionIndex * cellSize, 0, cellSize, cellSize), *selectionPen, *noBrush);
 
-    scene->clear();
-
-    qDebug() << "render images.size(): " << images->size() << endl;
-    for (int i = 0; i < images->size(); i++) {
-        PixelImage *p = images->at(i);
-        p->render(scene, i * cellSize, 0, cellSize);
+        qDebug() << scene->children().size() << endl;
     }
-
-    scene->addRect(QRect(selectionIndex * cellSize, 0, cellSize, cellSize), *selectionPen, *noBrush);
 }
 
 int ImageSequence::getWidth() {
