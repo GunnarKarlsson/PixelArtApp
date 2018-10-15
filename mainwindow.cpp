@@ -132,7 +132,6 @@ void MainWindow::styleButton(QPushButton *button, QFont &font) {
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete scene;
     delete pixelArtCanvas;
     delete palette;
     delete imageSequence;
@@ -141,9 +140,7 @@ MainWindow::~MainWindow()
     delete addFrameButton;
     delete playButton;
     delete saveButton;
-    for (int i = (frames.size() - 1); i == 0; --i) {
-        delete frames.at(i);
-    }
+    //TODO: delete frames
 }
 
 void MainWindow::addImage() {

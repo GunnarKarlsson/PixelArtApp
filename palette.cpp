@@ -39,7 +39,11 @@ Palette::Palette(QWidget *parent) {
 }
 
 Palette::~Palette() {
-
+    //TODO: delete paletteColors;
+    delete noPen;
+    delete borderPen;
+    delete selectionPen;
+    delete noBrush;
 }
 
 QColor Palette::getSelectedColor() {

@@ -20,7 +20,7 @@ void MovieScreen::doUpdate() {
 }
 
 MovieScreen::~MovieScreen() {
-
+    delete timer;
 }
 
 void MovieScreen::play() {
