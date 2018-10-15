@@ -3,6 +3,8 @@
 
 #include <QGraphicsView>
 #include <QMouseEvent>
+#include <QPen>
+#include <QBrush>
 #include "pixelimage.h"
 #include "pixelartcanvas.h"
 
@@ -37,6 +39,8 @@ private:
     std::vector<PixelImage*> *images;
     int *frameIndex;
     PixelArtCanvas *pac;
+    QPen *selectionPen;
+    QBrush *noBrush;
 };
 
 #endif // IMAGESEQUENCE_H
