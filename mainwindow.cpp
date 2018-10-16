@@ -79,6 +79,10 @@ MainWindow::MainWindow(QWidget *parent) :
     movieScreen = new MovieScreen(&frames);
     movieScreen->setFixedSize(movieScreen->getWidth(), movieScreen->getHeight());
 
+    newFileButton = new QPushButton("NEW");
+    styleButton(newFileButton, font);
+    connect(newFileButton, SIGNAL(released()), this, SLOT(createNew()));
+
     openButton = new QPushButton("OPEN");
     styleButton(openButton, font);
     connect(openButton, SIGNAL(released()), this, SLOT(openFile()));
@@ -107,6 +111,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QVBoxLayout *mainLayout = new QVBoxLayout();
 
     QLayout *actionBarLayout = new QHBoxLayout();
+    actionBarLayout->addWidget(newFileButton);
     actionBarLayout->addWidget(openButton);
     actionBarLayout->addWidget(addFrameButton);
     actionBarLayout->addWidget(playButton);
@@ -280,4 +285,21 @@ void MainWindow::loadFile(QString filename) {
 
     pixelArtCanvas->render(true);
     imageSequence->render(true);
+}
+
+void MainWindow::createNew() {
+    fileName = "frames_save_ " + QString::number(QDateTime::currentSecsSinceEpoch());
+    frames.clear();
+    //Add initial Data
+    PixelImage *pixelImage = new PixelImage();
+    for (int i = 0; i < (12 * 12); i++) { //TODO; remove hardcoded size
+        QColor *c = new QColor();
+        c->setNamedColor("#FFF1E8");
+        pixelImage->canvasColors.push_back(c);
+    }
+    frames.push_back(pixelImage);
+    frameIndex = 0;
+    pixelArtCanvas->render(true);
+    imageSequence->render(true);
+    movieScreen->render();
 }

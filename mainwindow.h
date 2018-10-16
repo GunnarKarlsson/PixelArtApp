@@ -23,6 +23,7 @@ public:
 
 
 public slots:
+    void createNew();
     void openFile();
     void doExport();
     void play();
@@ -41,6 +42,7 @@ private:
     ImageSequence *imageSequence;
     MovieScreen *movieScreen;
 
+    QPushButton *newFileButton;
     QPushButton *openButton;
     QPushButton *exportButton;
     QPushButton *addFrameButton;
