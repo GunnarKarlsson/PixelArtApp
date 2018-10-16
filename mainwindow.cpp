@@ -295,6 +295,7 @@ void MainWindow::loadFile(QString filename) {
 
 void MainWindow::createNew() {
     fileName = "frames_save_ " + QString::number(QDateTime::currentSecsSinceEpoch());
+    frameIndex = 0;
     frames.clear();
     setWindowTitle("Pixella: [ " + fileName + " ]");
     //Add initial Data
@@ -305,8 +306,9 @@ void MainWindow::createNew() {
         pixelImage->canvasColors.push_back(c);
     }
     frames.push_back(pixelImage);
-    frameIndex = 0;
+
     pixelArtCanvas->render(true);
+    pixelArtCanvas->setSceneRect(0-5, 0-5, pixelArtCanvas->width(), pixelArtCanvas->height());
     imageSequence->render(true);
     movieScreen->render();
 }

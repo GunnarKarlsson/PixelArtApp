@@ -6,10 +6,16 @@ PixelArtCanvas::PixelArtCanvas(std::vector<PixelImage*>  *frames, int *frameInde
     this->frameIndex = frameIndex;
     scene = new QGraphicsScene();
     setScene(scene);
+    setSceneRect(scene->sceneRect());
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("background: transparent; border: transparent;");
     render(true);
+}
+
+void PixelArtCanvas::scrollContentsBy(int, int)
+{
+
 }
 
 void PixelArtCanvas::setPalette(Palette *p) {
@@ -110,6 +116,11 @@ void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
 }
 
 void PixelArtCanvas::render(bool all) {
+
+    if (frames->size() == 0) {
+        return;
+    }
+
     QPen borderPen("#000000");
     borderPen.setWidth(10);
     borderPen.setCapStyle(Qt::SquareCap);
@@ -140,4 +151,6 @@ void PixelArtCanvas::render(bool all) {
         }
     }
     scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), borderPen, noBrush);
+    qDebug() << "canvas scene children " << scene->children().size() << endl;
+    qDebug() << "y: " << y() << endl;
 }

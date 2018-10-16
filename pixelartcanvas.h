@@ -16,6 +16,7 @@ class PixelArtCanvas : public QGraphicsView
 public:
     PixelArtCanvas(std::vector<PixelImage*> *frames, int *frameIndex, QWidget *parent = 0);
     ~PixelArtCanvas();
+    void scrollContentsBy(int, int);
 
 public slots:
     void mousePressEvent(QMouseEvent * e);
