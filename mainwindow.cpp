@@ -110,26 +110,32 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
 
-    QLayout *actionBarLayout = new QHBoxLayout();
-    actionBarLayout->addWidget(newFileButton);
-    actionBarLayout->addWidget(openButton);
-    actionBarLayout->addWidget(addFrameButton);
-    actionBarLayout->addWidget(playButton);
-    actionBarLayout->addWidget(stopButton);
-    actionBarLayout->addWidget(saveButton);
-    actionBarLayout->addWidget(exportButton);
-    mainLayout->addLayout(actionBarLayout);
 
-    QLayout *imageListLayout = new QHBoxLayout();
-    imageListLayout->addWidget(movieScreen);
+    QLayout *buttonBarLayout = new QHBoxLayout();
+    buttonBarLayout->addWidget(newFileButton);
+    buttonBarLayout->addWidget(openButton);
+    buttonBarLayout->addWidget(addFrameButton);
+    buttonBarLayout->addWidget(playButton);
+    buttonBarLayout->addWidget(stopButton);
+    buttonBarLayout->addWidget(saveButton);
+    buttonBarLayout->addWidget(exportButton);
+    mainLayout->addLayout(buttonBarLayout);
 
-    QLayout * layout = new QHBoxLayout();
-    mainLayout->addLayout(layout);
-    mainLayout->addWidget(imageSequence);
-    mainLayout->addLayout(imageListLayout);
+
+    QLayout * canvasAndPaletteLayout = new QHBoxLayout();
+    canvasAndPaletteLayout->addWidget(pixelArtCanvas);
+    canvasAndPaletteLayout->addWidget(palette);
+    mainLayout->addLayout(canvasAndPaletteLayout);
+
+    QLayout *imageSequenceLayout = new QHBoxLayout();
+    imageSequenceLayout->addWidget(imageSequence);
+    mainLayout->addLayout(imageSequenceLayout);
+
+    QLayout *movieScreenLayout = new QHBoxLayout();
+    movieScreenLayout ->addWidget(movieScreen);
+    mainLayout->addLayout(movieScreenLayout);
+
     ui->centralWidget->setLayout(mainLayout);
-    layout->addWidget(pixelArtCanvas);
-    layout->addWidget(palette);
 }
 
 void MainWindow::styleButton(QPushButton *button, QFont &font) {

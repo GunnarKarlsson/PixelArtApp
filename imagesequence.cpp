@@ -6,7 +6,7 @@ ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, 
     setScene(scene);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setAlignment(Qt::AlignLeft);
+    //setAlignment(Qt::AlignLeft);
     setStyleSheet("background: transparent; border: transparent;");
 
     selectionPen = new QPen("#000000");
@@ -59,18 +59,19 @@ void ImageSequence::update(QColor *color, int selectionIndex) {
 }
 
 void ImageSequence::render(bool all) {
+    int offset = 200;
     if (all) {
         scene->clear();
         qDebug() << "render images.size(): " << images->size() << endl;
         for (int i = 0; i < images->size(); i++) {
             PixelImage *p = images->at(i);
-            p->render(scene, i * cellSize, 0, cellSize);
+            p->render(scene, i * cellSize + offset, 0, cellSize);
         }
-        scene->addRect(QRect(selectionIndex * cellSize, 0, cellSize, cellSize), *selectionPen, *noBrush);
+        scene->addRect(QRect((selectionIndex * cellSize) + offset, 0, cellSize, cellSize), *selectionPen, *noBrush);
     } else {
         PixelImage *p = images->at(selectionIndex);
-        p->render(scene, selectionIndex * cellSize, 0, cellSize);
-        scene->addRect(QRect(selectionIndex * cellSize, 0, cellSize, cellSize), *selectionPen, *noBrush);
+        p->render(scene, (selectionIndex * cellSize) + offset, 0, cellSize);
+        scene->addRect(QRect((selectionIndex * cellSize) + offset, 0, cellSize, cellSize), *selectionPen, *noBrush);
     }
 }
 
