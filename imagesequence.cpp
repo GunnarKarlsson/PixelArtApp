@@ -6,7 +6,7 @@ ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, 
     setScene(scene);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //setAlignment(Qt::AlignLeft);
+    setAlignment(Qt::AlignLeft);
     setStyleSheet("background: transparent; border: transparent;");
 
     selectionPen = new QPen("#000000");
@@ -37,8 +37,9 @@ void ImageSequence::setPixelArtCanvas(PixelArtCanvas *pac) {
 }
 
 void ImageSequence::mousePressEvent(QMouseEvent * e) {
-    qDebug() << "imageseq mousePressEvent" << endl;
+    qDebug() << "imageseq mousePressEvent " << e->pos().x() << endl;
      int x = e->pos().x();
+
      selectionIndex = x / cellSize;
      qDebug() << "selectionIndex: " << selectionIndex << endl;
      *frameIndex = selectionIndex;
@@ -46,6 +47,7 @@ void ImageSequence::mousePressEvent(QMouseEvent * e) {
          pac->render(true);
      }
      render(true);
+
 }
 
 void ImageSequence::mouseReleaseEvent(QMouseEvent * e) {}

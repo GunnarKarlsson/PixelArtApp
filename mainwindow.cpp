@@ -296,6 +296,7 @@ void MainWindow::loadFile(QString filename) {
 void MainWindow::createNew() {
     fileName = "frames_save_ " + QString::number(QDateTime::currentSecsSinceEpoch());
     frames.clear();
+    setWindowTitle("Pixella: [ " + fileName + " ]");
     //Add initial Data
     PixelImage *pixelImage = new PixelImage();
     for (int i = 0; i < (12 * 12); i++) { //TODO; remove hardcoded size

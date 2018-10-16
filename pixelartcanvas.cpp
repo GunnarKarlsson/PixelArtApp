@@ -55,6 +55,7 @@ void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
     frames->at(*frameIndex)->canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
     render(true);
     isMousePressed = true;
+    imageSequence->render(false);
 }
 
 void PixelArtCanvas::mouseReleaseEvent(QMouseEvent * e) {
@@ -132,7 +133,7 @@ void PixelArtCanvas::render(bool all) {
         QBrush brush(*color);
         scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
         if (imageSequence) {
-            qDebug() << "updating image seqeunce" << endl;
+            //qDebug() << "updating image seqeunce from pixelartcanvas" << endl;
             imageSequence->update(color, selectionIndex);
         } else {
             qDebug() << "image sequence is null" << endl;
