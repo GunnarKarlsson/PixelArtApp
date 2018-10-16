@@ -5,7 +5,6 @@ MovieScreen::MovieScreen(std::vector<PixelImage*> *frames, QWidget *parent) : QG
     setScene(scene);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //setAlignment(Qt::AlignLeft);
     setStyleSheet("background: transparent; border: transparent;");
     this->frames = frames;
 

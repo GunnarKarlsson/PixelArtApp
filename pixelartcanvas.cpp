@@ -7,6 +7,7 @@ PixelArtCanvas::PixelArtCanvas(std::vector<PixelImage*>  *frames, int *frameInde
     scene = new QGraphicsScene();
     setScene(scene);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("background: transparent; border: transparent;");
     render(true);
 }
