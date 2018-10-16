@@ -23,13 +23,15 @@ public:
 
 
 public slots:
-     void doExport();
-     void play();
-     void stop();
-     void addImage();
-     void save();
+    void openFile();
+    void doExport();
+    void play();
+    void stop();
+    void addImage();
+    void save();
 
 private:
+    void loadFile(QString filename);
     void styleButton(QPushButton *button, QFont &font);
     void write(QJsonObject &json);
     Ui::MainWindow *ui;
@@ -39,6 +41,7 @@ private:
     ImageSequence *imageSequence;
     MovieScreen *movieScreen;
 
+    QPushButton *openButton;
     QPushButton *exportButton;
     QPushButton *addFrameButton;
     QPushButton *playButton;
@@ -46,6 +49,7 @@ private:
     QPushButton *saveButton;
     std::vector<PixelImage*> frames;
     int frameIndex = 0;
+    QString fileName;
 };
 
 #endif // MAINWINDOW_H

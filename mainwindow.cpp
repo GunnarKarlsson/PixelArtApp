@@ -8,6 +8,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QFileDialog>
 #include <common.h>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -23,9 +24,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family);
 
-    QString name = "frames_save.json";
+    fileName = "frames_save.json";
+    setWindowTitle("Pixella: [ " + fileName + " ]");
 
-    QFile jsonFile(name);
+    QFile jsonFile(fileName);
     jsonFile.open(QFile::ReadOnly);
     QString s = jsonFile.readAll();
     qDebug() << "opened file: " << s << endl;
@@ -77,6 +79,10 @@ MainWindow::MainWindow(QWidget *parent) :
     movieScreen = new MovieScreen(&frames);
     movieScreen->setFixedSize(movieScreen->getWidth(), movieScreen->getHeight());
 
+    openButton = new QPushButton("OPEN");
+    styleButton(openButton, font);
+    connect(openButton, SIGNAL(released()), this, SLOT(openFile()));
+
     //Add Buttons
     exportButton = new QPushButton("EXPORT");
     styleButton(exportButton, font);
@@ -101,6 +107,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QVBoxLayout *mainLayout = new QVBoxLayout();
 
     QLayout *actionBarLayout = new QHBoxLayout();
+    actionBarLayout->addWidget(openButton);
     actionBarLayout->addWidget(addFrameButton);
     actionBarLayout->addWidget(playButton);
     actionBarLayout->addWidget(stopButton);
@@ -123,7 +130,7 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::styleButton(QPushButton *button, QFont &font) {
     button->setFont(font);
     QFont f = button->font();
-    f.setPointSize(16);
+    f.setPointSize(12);
     button->setFont(f);
     button->setStyleSheet("background: transparent; color: #FFFFFF;");
 }
@@ -187,9 +194,7 @@ void MainWindow::stop() {
 void MainWindow::save() {
     qDebug() << "save()" << endl;
 
-    QString name = "frames_save.json";
-
-    QFile file(name);
+    QFile file(this->fileName);
 
     if (!file.open(QIODevice::WriteOnly)) {
         qDebug() << "Couldn't open save file." << endl;
@@ -229,4 +234,50 @@ void MainWindow::write(QJsonObject &json) {
         framesArray.append(jsonFrame);
     }
     json["frames"] =  framesArray;
+}
+
+void MainWindow::openFile() {
+    QString filename = QFileDialog::getOpenFileName(this,
+            tr("Open File"), "",
+            tr("All Files (*)"));
+    loadFile(filename);
+}
+
+void MainWindow::loadFile(QString filename) {
+
+    QFile jsonFile(filename);
+    jsonFile.open(QFile::ReadOnly);
+    QString s = jsonFile.readAll();
+    qDebug() << "opened file: " << s << endl;
+
+    this->fileName = filename.mid(filename.lastIndexOf("/"));
+    setWindowTitle("Pixella: [ " + fileName + " ]");
+
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(s.toUtf8());
+    QJsonObject jsonObject = jsonResponse.object();
+    QJsonArray jsonFramesArray = jsonObject["frames"].toArray();
+    qDebug() << "frames read from file: " << jsonFramesArray.size() << endl;
+
+    if (jsonFramesArray.size() == 0) {
+        qDebug() << "no frames loaded " << endl;
+        return;
+    }
+    frames.clear();
+
+    for (int i = 0; i < jsonFramesArray.size(); i++) {
+        QJsonObject jsonObj = jsonFramesArray[i].toObject();
+        QJsonArray jsonColors = jsonObj["colors"].toArray();
+        PixelImage *pixelImage = new PixelImage();
+        pixelImage->canvasColors.clear();
+        for (int i = 0; i < (12 * 12); i++) { //TODO; remove hardcoded size
+            QColor *c = new QColor();
+            qDebug() << jsonColors[i].toString() << endl;
+            c->setNamedColor(jsonColors[i].toString());
+            pixelImage->canvasColors.push_back(c);
+        }
+        frames.push_back(pixelImage);
+    }
+
+    pixelArtCanvas->render(true);
+    imageSequence->render(true);
 }
