@@ -21,7 +21,10 @@ PixelImage::PixelImage(const PixelImage &other) {
 }
 
 PixelImage::~PixelImage() {
-
+    for (int i = (canvasColors.size() - 1); i == 0; --i) {
+        QColor *c = canvasColors[i];
+        delete c;
+    }
 }
 
 void PixelImage::update(QColor *color, int index) {

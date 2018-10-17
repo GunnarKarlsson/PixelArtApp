@@ -273,6 +273,7 @@ void MainWindow::loadFile(QString filename) {
         qDebug() << "no frames loaded " << endl;
         return;
     }
+
     frames.clear();
 
     for (int i = 0; i < jsonFramesArray.size(); i++) {
@@ -290,6 +291,8 @@ void MainWindow::loadFile(QString filename) {
     }
 
     frameIndex = 0;
+
+    imageSequence->selectionIndex = 0;
 
     pixelArtCanvas->render(true);
 
