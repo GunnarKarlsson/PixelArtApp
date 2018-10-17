@@ -14,7 +14,7 @@ class PixelArtCanvas : public QGraphicsView
     Q_OBJECT
 
 public:
-    PixelArtCanvas(std::vector<PixelImage*> *frames, int *frameIndex, QWidget *parent = 0);
+    PixelArtCanvas(std::vector<PixelImage*> *frames, int *frameIndex, int *toolSelection, QWidget *parent = 0);
     ~PixelArtCanvas();
     void scrollContentsBy(int, int);
 
@@ -46,6 +46,7 @@ private:
     QPen *borderPen;
     QPen *noPen;
     QBrush *noBrush;
+    int *toolSelection;
 };
 
 #endif // PIXELARTCANVAS_H

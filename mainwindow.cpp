@@ -72,7 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     imageSequence = new ImageSequence(&frames, &frameIndex);
     imageSequence->setFixedSize(imageSequence->getWidth(), imageSequence->getHeight());
 
-    pixelArtCanvas = new PixelArtCanvas(&frames, &frameIndex);
+    pixelArtCanvas = new PixelArtCanvas(&frames, &frameIndex, &toolSelection);
     pixelArtCanvas->setPalette(palette);
     pixelArtCanvas->setImageSequence(imageSequence);
     pixelArtCanvas->setFixedSize(pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());

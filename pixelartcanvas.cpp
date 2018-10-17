@@ -1,9 +1,11 @@
 #include "pixelartcanvas.h"
 #include <QDebug>
+#include <tools.h>
 
-PixelArtCanvas::PixelArtCanvas(std::vector<PixelImage*>  *frames, int *frameIndex, QWidget *parent) {
+PixelArtCanvas::PixelArtCanvas(std::vector<PixelImage*>  *frames, int *frameIndex, int *toolSelection, QWidget *parent) {
     this->frames = frames;
     this->frameIndex = frameIndex;
+    this->toolSelection = toolSelection;
     scene = new QGraphicsScene();
     setScene(scene);
     setSceneRect(scene->sceneRect());
@@ -131,6 +133,11 @@ void PixelArtCanvas::render(bool all) {
 
     if (frames->size() == 0) {
         return;
+    }
+
+
+    if (*toolSelection == Tools::Eraser) {
+        frames->at(*frameIndex)->canvasColors[selectionIndex]->setNamedColor("#FFF1E8");
     }
 
     if (all) {
