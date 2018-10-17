@@ -30,6 +30,7 @@ public slots:
     void setImageSequence(ImageSequence *sequence);
 
 private:
+    void doFloodFill(int x, int y, QColor c);
     int selectionIndex = 0;
     const int borderSize = 10;
     const int cellSize = 24;

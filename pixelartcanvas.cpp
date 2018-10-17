@@ -69,10 +69,17 @@ void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
     //qDebug() << "y: " << y << endl;
 
     int selectionIndex = x + y * col_count;
-    //qDebug() << "selectionIndex: " << selectionIndex << endl;
+    qDebug() << "selectionIndex: " << selectionIndex << endl;
 
-    QColor selectedColor = palette->getSelectedColor();
-    frames->at(*frameIndex)->canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
+    if (*toolSelection == Tools::Fill) {
+        int x = selectionIndex % col_count;
+        int y = selectionIndex / row_count;
+        QColor *color = frames->at(*frameIndex)->canvasColors[selectionIndex];
+        doFloodFill(x, y, *color);
+    } else {
+        QColor selectedColor = palette->getSelectedColor();
+        frames->at(*frameIndex)->canvasColors[selectionIndex]->setNamedColor(selectedColor.name());
+    }
     render(true);
     isMousePressed = true;
     imageSequence->render(false);
@@ -87,6 +94,11 @@ void PixelArtCanvas::mouseDoubleClickEvent(QMouseEvent * e) {
 }
 
 void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
+
+    if (*toolSelection == Tools::Fill) {
+        return;
+    }
+
     if (!isMousePressed) {
         return;
     }
@@ -135,7 +147,6 @@ void PixelArtCanvas::render(bool all) {
         return;
     }
 
-
     if (*toolSelection == Tools::Eraser) {
         frames->at(*frameIndex)->canvasColors[selectionIndex]->setNamedColor("#FFF1E8");
     }
@@ -165,4 +176,27 @@ void PixelArtCanvas::render(bool all) {
     scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), *borderPen, *noBrush);
     qDebug() << "canvas scene children " << scene->children().size() << endl;
     qDebug() << "y: " << y() << endl;
+}
+
+void PixelArtCanvas::doFloodFill(int x, int y, QColor color) {
+    if (x < 0 || x >= col_count || y < 0 || y >= row_count) {
+        return;
+    }
+        qDebug() << "doFloodFill x:" << x << " y:"<<  y << endl;
+
+    int colorIndex = x + y * col_count;
+    qDebug() << "colorIndex: " << colorIndex << endl;
+    QColor *nextColor = frames->at(*frameIndex)->canvasColors[colorIndex];
+    qDebug() << "currColor" << color.name() << endl;
+    qDebug() << "nextColor: " << nextColor->name();
+    if (nextColor->name() != color.name()) {
+        qDebug() << "not same color" << endl;
+        return;
+    }
+
+    frames->at(*frameIndex)->canvasColors[colorIndex]->setNamedColor(palette->getSelectedColor().name());
+    doFloodFill(x+1, y, color);
+    doFloodFill(x-1, y, color);
+    doFloodFill(x, y+1, color);
+    doFloodFill(x, y-1, color);
 }
