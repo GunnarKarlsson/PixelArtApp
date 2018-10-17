@@ -53,4 +53,10 @@ RESOURCES += \
 
 DISTFILES += \
     Pixeled.ttf \
-    json_example
+    json_example \
+    eraser_32x32.png \
+    eraser_white_32x32.png \
+    pen_white_32x32.png \
+    pen_32x32.png \
+    fill_32x32.png \
+    fill_white_32x32.png

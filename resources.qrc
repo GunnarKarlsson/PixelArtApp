@@ -1,7 +1,13 @@
 <RCC>
     <qresource prefix="/Font">
-        <file>Fipps-Regular.otf</file>
-        <file>04B_30__.TTF</file>
         <file>Pixeled.ttf</file>
+    </qresource>
+    <qresource prefix="/Icons">
+        <file>eraser_32x32.png</file>
+        <file>eraser_white_32x32.png</file>
+        <file>pen_32x32.png</file>
+        <file>pen_white_32x32.png</file>
+        <file>fill_32x32.png</file>
+        <file>fill_white_32x32.png</file>
     </qresource>
 </RCC>
