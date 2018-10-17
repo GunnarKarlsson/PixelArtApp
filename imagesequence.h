@@ -23,6 +23,7 @@ public:
     int getHeight();
     void addImage();
     void setPixelArtCanvas(PixelArtCanvas *pac);
+    int selectionIndex = 0;
 
 public slots:
     void mousePressEvent(QMouseEvent * e);
@@ -31,7 +32,7 @@ public slots:
     void mouseMoveEvent(QMouseEvent * e);
 
 private:
-    int selectionIndex = 0;
+
     const int borderSize = 10;
     const int cellSize = 60;
     int maxLength = 8;

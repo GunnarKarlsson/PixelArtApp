@@ -4,6 +4,8 @@
 ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, QWidget *parent) : QGraphicsView(parent){
     scene = new QGraphicsScene();
     setScene(scene);
+    setScene(scene);
+    setSceneRect(scene->sceneRect());
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setAlignment(Qt::AlignLeft);
