@@ -53,6 +53,11 @@ PixelArtCanvas::~PixelArtCanvas() {
 }
 
 void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
+
+    if (isMousePressed) {
+        return;
+    }
+
     int yOffset = 10;
     int xOffset = 10;
     //qDebug() << e->pos().x() << endl;
