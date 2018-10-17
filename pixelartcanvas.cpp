@@ -10,6 +10,15 @@ PixelArtCanvas::PixelArtCanvas(std::vector<PixelImage*>  *frames, int *frameInde
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("background: transparent; border: transparent;");
+
+    borderPen = new QPen("#000000");
+    borderPen->setWidth(10);
+    borderPen->setCapStyle(Qt::SquareCap);
+    borderPen->setJoinStyle(Qt::MiterJoin);
+
+    noPen = new QPen(Qt::NoPen);
+    noBrush = new QBrush(Qt::NoBrush);
+
     render(true);
 }
 
@@ -35,7 +44,10 @@ int PixelArtCanvas::getHeight() {
 }
 
 PixelArtCanvas::~PixelArtCanvas() {
-
+    delete scene;
+    delete borderPen;
+    delete noPen;
+    delete noBrush;
 }
 
 void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
@@ -121,13 +133,6 @@ void PixelArtCanvas::render(bool all) {
         return;
     }
 
-    QPen borderPen("#000000");
-    borderPen.setWidth(10);
-    borderPen.setCapStyle(Qt::SquareCap);
-    borderPen.setJoinStyle(Qt::MiterJoin);
-
-    QPen noPen(Qt::NoPen);
-    QBrush noBrush(Qt::NoBrush);
     if (all) {
         scene->clear();
         for (int i = 0; i < frames->at(*frameIndex)->canvasColors.size(); i++) {
@@ -135,14 +140,14 @@ void PixelArtCanvas::render(bool all) {
             int y = i / row_count;
             QColor *color = frames->at(*frameIndex)->canvasColors[i];
             QBrush brush(*color);
-            scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
+            scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), *noPen, brush);
         }
     } else {
         int x = selectionIndex % col_count;
         int y = selectionIndex / row_count;
         QColor *color = frames->at(*frameIndex)->canvasColors[selectionIndex];
         QBrush brush(*color);
-        scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), noPen, brush);
+        scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), *noPen, brush);
         if (imageSequence) {
             //qDebug() << "updating image seqeunce from pixelartcanvas" << endl;
             imageSequence->update(color, selectionIndex);
@@ -150,7 +155,7 @@ void PixelArtCanvas::render(bool all) {
             qDebug() << "image sequence is null" << endl;
         }
     }
-    scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), borderPen, noBrush);
+    scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), *borderPen, *noBrush);
     qDebug() << "canvas scene children " << scene->children().size() << endl;
     qDebug() << "y: " << y() << endl;
 }

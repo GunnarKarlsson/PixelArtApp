@@ -26,10 +26,6 @@ ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, 
 }
 
 ImageSequence::~ImageSequence() {
-    for (int i = (images->size() - 1); i == 0; --i) {
-        PixelImage * p = images->at(i);
-        delete p;
-    }
     delete selectionPen;
     delete noBrush;
 }

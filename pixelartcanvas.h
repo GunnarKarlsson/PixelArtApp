@@ -43,6 +43,9 @@ private:
     int lastMousePosX = 0;
     int lastMousePosY = 0;
     int *frameIndex;
+    QPen *borderPen;
+    QPen *noPen;
+    QBrush *noBrush;
 };
 
 #endif // PIXELARTCANVAS_H
