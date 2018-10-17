@@ -18,6 +18,7 @@ public:
     void render();
     int getWidth();
     int getHeight();
+    int frameIndex = 0;
 
 public slots:
     void doUpdate();
@@ -29,7 +30,6 @@ private:
     QTimer *timer;
     int frameTimeMs = 1000;
     QGraphicsScene *scene;
-    int frameIndex = 0;
     int cellSize = 200;
 };
 

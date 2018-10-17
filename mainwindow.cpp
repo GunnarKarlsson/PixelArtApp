@@ -294,6 +294,9 @@ void MainWindow::loadFile(QString filename) {
 
     imageSequence->selectionIndex = 0;
 
+    movieScreen->stop();
+    movieScreen->frameIndex = 0;
+
     pixelArtCanvas->render(true);
 
     imageSequence->render(true);
@@ -319,5 +322,9 @@ void MainWindow::createNew() {
     imageSequence->selectionIndex = 0;
     imageSequence->render(true);
     imageSequence->setSceneRect(0-5, 0-5, imageSequence->width(), imageSequence->height());
+
+    movieScreen->stop();
+    movieScreen->frameIndex = 0;
+
     movieScreen->render();
 }
