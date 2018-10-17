@@ -8,6 +8,7 @@
 #include "pixelartcanvas.h"
 #include "imagesequence.h"
 #include "moviescreen.h"
+#include "tools.h"
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +42,7 @@ private:
     Palette *palette;
     ImageSequence *imageSequence;
     MovieScreen *movieScreen;
+    Tools *tools;
 
     QPushButton *newFileButton;
     QPushButton *openButton;

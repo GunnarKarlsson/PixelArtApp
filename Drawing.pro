@@ -29,7 +29,8 @@ SOURCES += \
     palette.cpp \
     imagesequence.cpp \
     pixelimage.cpp \
-    moviescreen.cpp
+    moviescreen.cpp \
+    tools.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +39,8 @@ HEADERS += \
     common.h \
     imagesequence.h \
     pixelimage.h \
-    moviescreen.h
+    moviescreen.h \
+    tools.h
 
 FORMS += \
         mainwindow.ui

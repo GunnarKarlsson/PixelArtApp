@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    setFixedSize(680, 680);
+    setFixedSize(840, 680);
 
     ui->setupUi(this);
 
@@ -66,6 +66,9 @@ MainWindow::MainWindow(QWidget *parent) :
     palette = new Palette();
     palette->setFixedSize(palette->getWidth(), palette->getHeight());
 
+    tools = new Tools();
+    tools->setFixedSize(40, 120);
+
     imageSequence = new ImageSequence(&frames, &frameIndex);
     imageSequence->setFixedSize(imageSequence->getWidth(), imageSequence->getHeight());
 
@@ -92,7 +95,7 @@ MainWindow::MainWindow(QWidget *parent) :
     styleButton(exportButton, font);
     connect(exportButton, SIGNAL (released()),this, SLOT (doExport()));
 
-    addFrameButton = new QPushButton("ADD FRAME");
+    addFrameButton = new QPushButton("+FRAME");
     styleButton(addFrameButton, font);
     connect(addFrameButton, SIGNAL (released()),this, SLOT (addImage()));
 
@@ -110,7 +113,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
 
-
     QLayout *buttonBarLayout = new QHBoxLayout();
     buttonBarLayout->addWidget(newFileButton);
     buttonBarLayout->addWidget(openButton);
@@ -123,15 +125,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     QLayout * canvasAndPaletteLayout = new QHBoxLayout();
+
     canvasAndPaletteLayout->addWidget(pixelArtCanvas);
+    canvasAndPaletteLayout->addWidget(tools);
     canvasAndPaletteLayout->addWidget(palette);
+
     mainLayout->addLayout(canvasAndPaletteLayout);
 
-    QLayout *imageSequenceLayout = new QHBoxLayout();
-    imageSequenceLayout->addWidget(imageSequence);
-    mainLayout->addLayout(imageSequenceLayout);
-
     QLayout *movieScreenLayout = new QHBoxLayout();
+    movieScreenLayout->addWidget(imageSequence);
     movieScreenLayout ->addWidget(movieScreen);
     mainLayout->addLayout(movieScreenLayout);
 
