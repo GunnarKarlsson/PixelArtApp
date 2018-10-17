@@ -54,6 +54,7 @@ private:
     std::vector<PixelImage*> frames;
     int frameIndex = 0;
     QString fileName;
+    int toolSelection = 0;
 };
 
 #endif // MAINWINDOW_H

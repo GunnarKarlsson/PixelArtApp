@@ -66,8 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     palette = new Palette();
     palette->setFixedSize(palette->getWidth(), palette->getHeight());
 
-    tools = new Tools();
-    qDebug() << "tools getWidth " << tools->getWidth();
+    tools = new Tools(&toolSelection);
     tools->setFixedSize(tools->getWidth(), tools->getHeight());
 
     imageSequence = new ImageSequence(&frames, &frameIndex);

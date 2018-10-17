@@ -7,21 +7,25 @@
 #include <QPen>
 #include <QMouseEvent>
 #include <QGraphicsView>
+#include <QPushButton>
 
 class Tools : public QGraphicsView
 {
     Q_OBJECT
 
 public:
-    Tools(QWidget *parent  = 0);
+    Tools(int *toolSelection, QWidget *parent  = 0);
     ~Tools();
     void render();
     int getWidth();
     int getHeight();
-    int toolSelection = 0;
+    bool eventFilter(QObject *, QEvent*);
 
 public slots:
     void mouseReleaseEvent(QMouseEvent * e);
+    void selectPen();
+    void selectEraser();
+    void selectFill();
 
 private:
    QGraphicsScene *scene;
@@ -36,6 +40,10 @@ private:
    QBrush *onBrush;
    QBrush *offBrush;
    QPen *noPen;
+   QPushButton *penButton;
+   QPushButton  *eraserButton;
+   QPushButton *fillButton;
+   int * toolSelection;
 };
 
 #endif // TOOLS_H
