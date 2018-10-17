@@ -45,11 +45,11 @@ void Tools::render() {
 }
 
 int Tools::getWidth() {
-    32;
+    return 60;
 }
 
 int Tools::getHeight() {
-   32 * 3;
+   return 180;
 }
 
 void Tools::mouseReleaseEvent(QMouseEvent * e) {
