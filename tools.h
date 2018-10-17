@@ -25,7 +25,8 @@ public slots:
 
 private:
    QGraphicsScene *scene;
-   int toolSize = 40;
+   int toolSize = 32;
+   QGraphicsPixmapItem *penOffPixmapItem;
    QPixmap *iconOnPen;
    QPixmap *iconOffPen;
    QPixmap *iconOnEraser;
