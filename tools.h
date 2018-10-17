@@ -28,6 +28,7 @@ public slots:
     void selectFill();
 
 private:
+   void clearAllButtonSelections();
    QGraphicsScene *scene;
    int toolSize = 32;
    QGraphicsPixmapItem *penOffPixmapItem;

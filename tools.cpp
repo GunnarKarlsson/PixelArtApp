@@ -13,33 +13,39 @@ Tools::Tools(int *tool, QWidget *parent) : QGraphicsView(parent) {
     scene = new QGraphicsScene(this);
 
     penButton = new QPushButton();
-    QPixmap pixmap1(":/Icons/pen_32x32.png");
-    QIcon ButtonIcon1(pixmap1);
+    penButton->setFixedSize(50, 50);
+    iconOffPen = new QPixmap(":/Icons/pen_32x32.png");
+    iconOnPen = new QPixmap(":/Icons/pen_white_32x32.png");
+    QIcon ButtonIcon1(*iconOffPen);
     penButton->setIcon(ButtonIcon1);
-    penButton->setIconSize(pixmap1.rect().size());
+    penButton->setIconSize(iconOffPen->rect().size());
+    penButton->setStyleSheet(" QPushButton { background-color: transparent;}");
     layout->addWidget(penButton);
     connect(penButton, SIGNAL(released()), this, SLOT(selectPen()));
 
-
     eraserButton = new QPushButton();
-    QPixmap pixmap2(":/Icons/eraser_32x32.png");
-    QIcon ButtonIcon2(pixmap2);
+    eraserButton->setFixedSize(50, 50);
+    iconOffEraser = new QPixmap(":/Icons/eraser_32x32.png");
+    iconOnEraser = new QPixmap(":/Icons/eraser_white_32x32.png");
+    QIcon ButtonIcon2(*iconOffEraser);
     eraserButton->setIcon(ButtonIcon2);
-    eraserButton->setIconSize(pixmap2.rect().size());
+    eraserButton->setIconSize(iconOffEraser->rect().size());
+    eraserButton->setStyleSheet(" QPushButton { background-color: transparent;}");
     layout->addWidget(eraserButton);
     connect(eraserButton, SIGNAL(released()), this, SLOT(selectEraser()));
 
     fillButton = new QPushButton();
-    QPixmap pixmap3(":/Icons/fill_32x32.png");
-    QIcon ButtonIcon3(pixmap3);
+    fillButton->setFixedSize(50, 50);
+    iconOffFill = new QPixmap(":/Icons/fill_32x32.png");
+    iconOnFill = new QPixmap(":/Icons/fill_white_32x32.png");
+    QIcon ButtonIcon3(*iconOffFill);
     fillButton->setIcon(ButtonIcon3);
-    fillButton->setIconSize(pixmap3.rect().size());
+    fillButton->setIconSize(iconOffFill->rect().size());
+    fillButton->setStyleSheet(" QPushButton { background-color: transparent;}");
     layout->addWidget(fillButton);
     connect(fillButton, SIGNAL(released()), this, SLOT(selectFill()));
 
     setLayout(layout);
-
-    //view->show();
 }
 
 Tools::~Tools() {
@@ -78,12 +84,41 @@ void Tools::mouseReleaseEvent(QMouseEvent * e) {
 
 void Tools::selectPen() {
     qDebug() << "selectPen()" << endl;
+    clearAllButtonSelections();
+    QIcon buttonIcon(*iconOnPen);
+    penButton->setStyleSheet(" QPushButton { background-color: black;}");
+    penButton->setIcon(buttonIcon);
+    penButton->setIconSize(iconOnPen->rect().size());
 }
 
 void Tools::selectEraser() {
     qDebug() << "selectEraser()" << endl;
+    clearAllButtonSelections();
+    QIcon buttonIcon(*iconOnEraser);
+    eraserButton->setStyleSheet(" QPushButton { background-color: black;}");
+    eraserButton->setIcon(buttonIcon);
+    eraserButton->setIconSize(iconOnEraser->rect().size());
 }
 
 void Tools::selectFill() {
     qDebug() << "selectFill()" << endl;
+    clearAllButtonSelections();
+    QIcon buttonIcon(*iconOnFill);
+    fillButton->setStyleSheet(" QPushButton { background-color: black;}");
+    fillButton->setIcon(buttonIcon);
+    fillButton->setIconSize(iconOnFill->rect().size());
+}
+
+void Tools::clearAllButtonSelections() {
+    QIcon buttonIconPen(*iconOffPen);
+    penButton->setStyleSheet(" QPushButton { background-color: transparent;}");
+    penButton->setIcon(buttonIconPen);
+
+    QIcon buttonIconEraser(*iconOffEraser);
+    eraserButton->setStyleSheet(" QPushButton { background-color: transparent;}");
+    eraserButton->setIcon(buttonIconEraser);
+
+    QIcon buttonIconFill(*iconOffFill);
+    fillButton->setStyleSheet(" QPushButton { background-color: transparent;}");
+    fillButton->setIcon(buttonIconFill);
 }
