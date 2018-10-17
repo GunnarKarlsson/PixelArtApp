@@ -36,7 +36,6 @@ HEADERS += \
         mainwindow.h \
     pixelartcanvas.h \
     palette.h \
-    common.h \
     imagesequence.h \
     pixelimage.h \
     moviescreen.h \
@@ -55,7 +54,6 @@ RESOURCES += \
 
 DISTFILES += \
     Pixeled.ttf \
-    json_example \
     eraser_32x32.png \
     eraser_white_32x32.png \
     pen_white_32x32.png \
