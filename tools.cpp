@@ -59,11 +59,11 @@ void Tools::render() {
 }
 
 int Tools::getWidth() {
-    return 60;
+    return 62;
 }
 
 int Tools::getHeight() {
-   return 180;
+   return 172;
 }
 
 bool Tools::eventFilter(QObject *obj, QEvent *e) {
