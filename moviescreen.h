@@ -23,7 +23,6 @@ public:
 public slots:
     void doUpdate();
 
-
 private:
     void nextFrame();
     std::vector<PixelImage*> *frames;

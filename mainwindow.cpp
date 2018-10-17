@@ -143,7 +143,7 @@ void MainWindow::styleButton(QPushButton *button, QFont &font) {
     QFont f = button->font();
     f.setPointSize(12);
     button->setFont(f);
-    button->setStyleSheet("background: transparent; color: #FFFFFF;");
+    button->setStyleSheet(" QPushButton { background-color: transparent; color: #FFFFFF;} QPushButton::pressed { background-color: transparent; color: #FF77A9; }");
 }
 
 
