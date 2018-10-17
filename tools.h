@@ -20,6 +20,9 @@ public:
     int getWidth();
     int getHeight();
     bool eventFilter(QObject *, QEvent*);
+    static const int Pen = 0;
+    static const int Eraser = 1;
+    static const int Fill = 2;
 
 public slots:
     void mouseReleaseEvent(QMouseEvent * e);
