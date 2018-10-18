@@ -9,6 +9,7 @@ Tools::Tools(int *tool, QWidget *parent) : QGraphicsView(parent) {
     toolSelection = tool;
     installEventFilter(this);
     QVBoxLayout *layout = new QVBoxLayout();
+    layout->setContentsMargins(0,0,0,0);
 
     scene = new QGraphicsScene(this);
 
@@ -59,11 +60,11 @@ void Tools::render() {
 }
 
 int Tools::getWidth() {
-    return 62;
+    return 50;
 }
 
 int Tools::getHeight() {
-   return 172;
+   return 150;
 }
 
 bool Tools::eventFilter(QObject *obj, QEvent *e) {
