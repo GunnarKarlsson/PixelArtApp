@@ -19,7 +19,6 @@ public:
     void render();
     int getWidth();
     int getHeight();
-    bool eventFilter(QObject *, QEvent*);
     static const int Pen = 0;
     static const int Eraser = 1;
     static const int Fill = 2;
@@ -33,8 +32,7 @@ public slots:
 private:
    void clearAllButtonSelections();
    QGraphicsScene *scene;
-   int toolSize = 32;
-   QGraphicsPixmapItem *penOffPixmapItem;
+   int toolSize = 50;
    QPixmap *iconOnPen;
    QPixmap *iconOffPen;
    QPixmap *iconOnEraser;
