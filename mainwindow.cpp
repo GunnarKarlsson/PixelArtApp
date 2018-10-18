@@ -25,10 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fileName = getLastOpenedFileName();
     if (fileName.length() == 0) {
-        fileName = "frames_save_ " + QString::number(QDateTime::currentSecsSinceEpoch());
+        fileName = "frames_save_" + QString::number(QDateTime::currentSecsSinceEpoch());
+        saveLastOpenedFileName();
     }
     setWindowTitle("Pixella: [ " + fileName + " ]");
-    saveLastOpenedFileName();
 
     QFile jsonFile(fileName);
     jsonFile.open(QFile::ReadOnly);
@@ -256,6 +256,7 @@ void MainWindow::openFile() {
             tr("Open File"), "",
             tr("All Files (*)"));
     loadFile(filename);
+    saveLastOpenedFileName();
 }
 
 void MainWindow::loadFile(QString filename) {
@@ -263,7 +264,6 @@ void MainWindow::loadFile(QString filename) {
     QFile jsonFile(filename);
     jsonFile.open(QFile::ReadOnly);
     QString s = jsonFile.readAll();
-    qDebug() << "opened file: " << s << endl;
 
     this->fileName = filename.mid(filename.lastIndexOf("/"));
     setWindowTitle("Pixella: [ " + fileName + " ]");
