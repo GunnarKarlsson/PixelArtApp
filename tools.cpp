@@ -7,16 +7,16 @@
 
 Tools::Tools(int *tool, QWidget *parent) : QGraphicsView(parent) {
     toolSelection = tool;
-    installEventFilter(this);
     QVBoxLayout *layout = new QVBoxLayout();
-    layout->setContentsMargins(0,0,0,0);
+    layout->setContentsMargins(0,0,0,10);
+    setStyleSheet("border: transparent;");
 
     scene = new QGraphicsScene(this);
 
     *toolSelection = Pen;
 
     penButton = new QPushButton();
-    penButton->setFixedSize(50, 50);
+    penButton->setFixedSize(toolSize, toolSize);
     iconOffPen = new QPixmap(":/Icons/pen_32x32.png");
     iconOnPen = new QPixmap(":/Icons/pen_white_32x32.png");
     QIcon ButtonIcon1(*iconOnPen);
@@ -27,7 +27,7 @@ Tools::Tools(int *tool, QWidget *parent) : QGraphicsView(parent) {
     connect(penButton, SIGNAL(released()), this, SLOT(selectPen()));
 
     eraserButton = new QPushButton();
-    eraserButton->setFixedSize(50, 50);
+    eraserButton->setFixedSize(toolSize, toolSize);
     iconOffEraser = new QPixmap(":/Icons/eraser_32x32.png");
     iconOnEraser = new QPixmap(":/Icons/eraser_white_32x32.png");
     QIcon ButtonIcon2(*iconOffEraser);
@@ -38,7 +38,7 @@ Tools::Tools(int *tool, QWidget *parent) : QGraphicsView(parent) {
     connect(eraserButton, SIGNAL(released()), this, SLOT(selectEraser()));
 
     fillButton = new QPushButton();
-    fillButton->setFixedSize(50, 50);
+    fillButton->setFixedSize(toolSize, toolSize);
     iconOffFill = new QPixmap(":/Icons/fill_32x32.png");
     iconOnFill = new QPixmap(":/Icons/fill_white_32x32.png");
     QIcon ButtonIcon3(*iconOffFill);
@@ -60,16 +60,11 @@ void Tools::render() {
 }
 
 int Tools::getWidth() {
-    return 50;
+    return toolSize;
 }
 
 int Tools::getHeight() {
    return 150;
-}
-
-bool Tools::eventFilter(QObject *obj, QEvent *e) {
-     //qDebug() << "eventfilter" << e->MouseButtonPress<< endl;
-    return true;
 }
 
 void Tools::mouseReleaseEvent(QMouseEvent * e) {
