@@ -4,7 +4,6 @@
 ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, QWidget *parent) : QGraphicsView(parent){
     scene = new QGraphicsScene();
     setScene(scene);
-    setScene(scene);
     setSceneRect(scene->sceneRect());
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -21,7 +20,6 @@ ImageSequence::ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, 
     this->images = frames;
     this->frameIndex = frameIndex;
 
-    qDebug() << "images.size() in ctor" << images->size() << endl;
     render(true);
 }
 
@@ -35,27 +33,14 @@ void ImageSequence::setPixelArtCanvas(PixelArtCanvas *pac) {
 }
 
 void ImageSequence::mousePressEvent(QMouseEvent * e) {
-    qDebug() << "imageseq mousePressEvent " << e->pos().x() << endl;
      int x = e->pos().x();
-
      selectionIndex = x / cellSize;
-     qDebug() << "selectionIndex: " << selectionIndex << endl;
      *frameIndex = selectionIndex;
      if (pac) {
          pac->render(true);
      }
      render(true);
 
-}
-
-void ImageSequence::mouseReleaseEvent(QMouseEvent * e) {}
-
-void ImageSequence::mouseDoubleClickEvent(QMouseEvent * e) {}
-
-void ImageSequence::mouseMoveEvent(QMouseEvent * e) {}
-
-void ImageSequence::update(QColor *color, int selectionIndex) {
-    render(false);
 }
 
 void ImageSequence::render(bool all) {

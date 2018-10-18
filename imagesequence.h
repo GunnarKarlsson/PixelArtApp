@@ -17,7 +17,6 @@ class ImageSequence : public QGraphicsView
 public:
     ImageSequence(std::vector<PixelImage*> *frames, int *frameIndex, QWidget *parent = 0);
     ~ImageSequence();
-    void update(QColor *color, int selectionIndex);
     void render(bool all);
     int getWidth();
     int getHeight();
@@ -27,9 +26,6 @@ public:
 
 public slots:
     void mousePressEvent(QMouseEvent * e);
-    void mouseReleaseEvent(QMouseEvent * e);
-    void mouseDoubleClickEvent(QMouseEvent * e);
-    void mouseMoveEvent(QMouseEvent * e);
 
 private:
 

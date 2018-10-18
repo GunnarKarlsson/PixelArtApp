@@ -172,8 +172,7 @@ void PixelArtCanvas::render(bool all) {
         QBrush brush(*color);
         scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), *noPen, brush);
         if (imageSequence) {
-            //qDebug() << "updating image seqeunce from pixelartcanvas" << endl;
-            imageSequence->update(color, selectionIndex);
+            imageSequence->render(false);
         } else {
             qDebug() << "image sequence is null" << endl;
         }
