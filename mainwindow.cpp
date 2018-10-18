@@ -9,7 +9,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QFileDialog>
-#include <common.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,8 +23,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family);
 
-    fileName = "frames_save.json";
+    fileName = getLastOpenedFileName();
+    if (fileName.length() == 0) {
+        fileName = "frames_save_ " + QString::number(QDateTime::currentSecsSinceEpoch());
+    }
     setWindowTitle("Pixella: [ " + fileName + " ]");
+    saveLastOpenedFileName();
 
     QFile jsonFile(fileName);
     jsonFile.open(QFile::ReadOnly);
@@ -123,7 +126,6 @@ MainWindow::MainWindow(QWidget *parent) :
     buttonBarLayout->addWidget(exportButton);
     mainLayout->addLayout(buttonBarLayout);
 
-
     QLayout * canvasAndPaletteLayout = new QHBoxLayout();
 
     canvasAndPaletteLayout->addWidget(pixelArtCanvas);
@@ -164,8 +166,6 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::addImage() {
-    //imageSequence->addImage();
-
     PixelImage * currentImage = frames[frameIndex];
     frames.push_back(new PixelImage(*currentImage));
     imageSequence->render(true);
@@ -226,6 +226,8 @@ void MainWindow::save() {
 
     QTextStream stream( &file );
     stream << strJson << endl;
+
+    saveLastOpenedFileName();
 }
 
 void MainWindow::write(QJsonObject &json) {
@@ -265,6 +267,7 @@ void MainWindow::loadFile(QString filename) {
 
     this->fileName = filename.mid(filename.lastIndexOf("/"));
     setWindowTitle("Pixella: [ " + fileName + " ]");
+    saveLastOpenedFileName();
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(s.toUtf8());
     QJsonObject jsonObject = jsonResponse.object();
@@ -329,4 +332,42 @@ void MainWindow::createNew() {
     movieScreen->frameIndex = 0;
 
     movieScreen->render();
+}
+
+QString MainWindow::getLastOpenedFileName() {
+    QFile file(lastOpenedReferenceFilename);
+
+    file.open(QFile::ReadOnly);
+    QString s = file.readAll();
+    qDebug() << "opened file: " << s << endl;
+
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(s.toUtf8());
+    QJsonObject jsonObject = jsonResponse.object();
+    QString name = jsonObject["previousFile"].toString();
+    if (name == nullptr) {
+        name = "";
+    }
+    return name;
+}
+
+void MainWindow::saveLastOpenedFileName() {
+    QFile file(lastOpenedReferenceFilename);
+
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Couldn't open last ref file." << endl;
+        return;
+    } else {
+        qDebug() << "last ref file opened";
+    }
+
+    QJsonObject json;
+    json["previousFile"] = fileName;
+
+    QJsonDocument doc(json);
+    QString strJson(doc.toJson(QJsonDocument::Compact));
+
+    qDebug() << "out last ref: " << strJson << endl;
+
+    QTextStream stream( &file );
+    stream << strJson << endl;
 }

@@ -1,5 +1,4 @@
 #include "palette.h"
-#include "common.h"
 #include <QDebug>
 
 Palette::Palette(QWidget *parent) {

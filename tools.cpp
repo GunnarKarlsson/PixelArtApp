@@ -67,7 +67,7 @@ int Tools::getHeight() {
 }
 
 bool Tools::eventFilter(QObject *obj, QEvent *e) {
-     qDebug() << "eventfilter" << e->MouseButtonPress<< endl;
+     //qDebug() << "eventfilter" << e->MouseButtonPress<< endl;
     return true;
 }
 

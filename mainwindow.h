@@ -33,6 +33,8 @@ public slots:
     void save();
 
 private:
+    QString getLastOpenedFileName();
+    void saveLastOpenedFileName();
     void loadFile(QString filename);
     void styleButton(QPushButton *button, QFont &font);
     void write(QJsonObject &json);
@@ -55,6 +57,7 @@ private:
     int frameIndex = 0;
     QString fileName;
     int toolSelection;
+    const QString lastOpenedReferenceFilename = "previous.json";
 };
 
 #endif // MAINWINDOW_H
