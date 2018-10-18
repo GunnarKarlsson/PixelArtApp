@@ -66,11 +66,11 @@ void Palette::mousePressEvent(QMouseEvent * e) {
     qDebug() << e->pos().x() << endl;
     qDebug() << e->pos().y() << endl;
 
-    int x = e->pos().x();// - borderSize*2;
+    int x = e->pos().x();
     x /= cellSize;
     x %= col_count;
 
-    int y = e->pos().y();// - borderSize*2; //- offset;
+    int y = e->pos().y();
     y /= cellSize;
 
     qDebug() << "x: "  << x << endl;
@@ -98,8 +98,6 @@ void Palette::mouseMoveEvent(QMouseEvent * e) {
 void Palette::render() {
 
     scene->clear();
-
-    qDebug() << "border: "<< borderSize << endl;
 
     for (int i = 0; i < paletteColors.size(); i++) {
         int x = i % col_count;

@@ -46,7 +46,6 @@ void ImageSequence::mousePressEvent(QMouseEvent * e) {
 void ImageSequence::render(bool all) {
     if (all) {
         scene->clear();
-        qDebug() << "render images.size(): " << images->size() << endl;
         for (int i = 0; i < images->size(); i++) {
             PixelImage *p = images->at(i);
             p->render(scene, i * cellSize, 0, cellSize);

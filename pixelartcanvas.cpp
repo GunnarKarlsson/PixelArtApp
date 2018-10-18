@@ -60,8 +60,6 @@ void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
 
     int yOffset = 10;
     int xOffset = 10;
-    //qDebug() << e->pos().x() << endl;
-    //qDebug() << e->pos().y() << endl;
 
     int x = e->pos().x() - xOffset;
     x /= cellSize;
@@ -70,11 +68,7 @@ void PixelArtCanvas::mousePressEvent(QMouseEvent * e) {
     int y = e->pos().y() - yOffset;
     y /= cellSize;
 
-    //qDebug() << "x: "  << x << endl;
-    //qDebug() << "y: " << y << endl;
-
     int selectionIndex = x + y * col_count;
-    qDebug() << "selectionIndex: " << selectionIndex << endl;
 
     if (*toolSelection == Tools::Fill) {
         int x = selectionIndex % col_count;
@@ -119,9 +113,6 @@ void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
         return;
     }
 
-    //qDebug() << e->pos().x() << endl;
-    //qDebug() << e->pos().y() << endl;
-
     lastMousePosX = e->pos().x();
     lastMousePosY = e->pos().y();
 
@@ -132,11 +123,7 @@ void PixelArtCanvas::mouseMoveEvent(QMouseEvent * e) {
     int y = e->pos().y() - yOffset;
     y /= cellSize;
 
-    //qDebug() << "x: "  << x << endl;
-    //qDebug() << "y: " << y << endl;
-
     selectionIndex = x + y * col_count;
-    //qDebug() << "selectionIndex: " << selectionIndex << endl;
 
     QColor selectedColor = palette->getSelectedColor();
     if (selectionIndex > col_count * row_count) {
@@ -173,28 +160,19 @@ void PixelArtCanvas::render(bool all) {
         scene->addRect(QRect((x*cellSize) + borderSize/2,(y*cellSize) + borderSize/2,cellSize,cellSize), *noPen, brush);
         if (imageSequence) {
             imageSequence->render(false);
-        } else {
-            qDebug() << "image sequence is null" << endl;
         }
     }
     scene->addRect(QRect(0.0, 0.0, cellSize*col_count + borderSize, cellSize*row_count + borderSize), *borderPen, *noBrush);
-    qDebug() << "canvas scene children " << scene->children().size() << endl;
-    qDebug() << "y: " << y() << endl;
 }
 
 void PixelArtCanvas::doFloodFill(int x, int y, QColor color) {
     if (x < 0 || x >= col_count || y < 0 || y >= row_count) {
         return;
     }
-        qDebug() << "doFloodFill x:" << x << " y:"<<  y << endl;
 
     int colorIndex = x + y * col_count;
-    qDebug() << "colorIndex: " << colorIndex << endl;
     QColor *nextColor = frames->at(*frameIndex)->canvasColors[colorIndex];
-    qDebug() << "currColor" << color.name() << endl;
-    qDebug() << "nextColor: " << nextColor->name();
     if (nextColor->name() != color.name()) {
-        qDebug() << "not same color" << endl;
         return;
     }
 

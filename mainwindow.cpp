@@ -18,14 +18,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    //Load resources
     int id = QFontDatabase::addApplicationFont(":/Font/Pixeled.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family);
 
     fileName = getLastOpenedFileName();
     if (fileName.length() == 0) {
-        fileName = "frames_save_" + QString::number(QDateTime::currentSecsSinceEpoch());
+        fileName = "pixella_" + QString::number(QDateTime::currentSecsSinceEpoch());
         saveLastOpenedFileName();
     }
     setWindowTitle("Pixella: [ " + fileName + " ]");
@@ -172,16 +171,14 @@ void MainWindow::addImage() {
 }
 
 void MainWindow::doExport() {
-    qDebug() << "Save()" << endl;
-
-    qDebug() << "pixelArtCanvas x: " << pixelArtCanvas->rect().x() << endl;
+    //TODO: export all frames, not just one
 
     int offset = 0;
     QRect rect(pixelArtCanvas->x(), pixelArtCanvas->y() + offset, pixelArtCanvas->getWidth(), pixelArtCanvas->getHeight());
 
     QImage image = grab(rect).toImage();
     qint64 time = QDateTime::currentMSecsSinceEpoch();
-    QString filePath = "/Users/gunnarkarlsson/nano_pixel_image_" +   QString::number(time) + ".png";
+    QString filePath = "Pixella_image_" +   QString::number(time) + ".png";
     QFile file(filePath);
     if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         image.save(&file, "PNG");
@@ -233,7 +230,6 @@ void MainWindow::save() {
 void MainWindow::write(QJsonObject &json) {
     json["id"] = "id";
     json["frame_count"] = (int)frames.size();
-    json["created_date"] = "some_created_date";
     json["row_count"] = 12;
     json["row_count"] = 12;
     QJsonArray framesArray;
@@ -309,7 +305,7 @@ void MainWindow::loadFile(QString filename) {
 }
 
 void MainWindow::createNew() {
-    fileName = "frames_save_ " + QString::number(QDateTime::currentSecsSinceEpoch());
+    fileName = "Pixella_ " + QString::number(QDateTime::currentSecsSinceEpoch());
     frameIndex = 0;
     frames.clear();
     setWindowTitle("Pixella: [ " + fileName + " ]");
