@@ -17,8 +17,8 @@ Tools::Tools(int *tool, QWidget *parent) : QGraphicsView(parent) {
 
     penButton = new QPushButton();
     penButton->setFixedSize(toolSize, toolSize);
-    iconOffPen = new QPixmap(":/Icons/pen_32x32.png");
-    iconOnPen = new QPixmap(":/Icons/pen_white_32x32.png");
+    iconOffPen = new QPixmap(":/assets/pen_32x32.png");
+    iconOnPen = new QPixmap(":/assets/pen_white_32x32.png");
     QIcon ButtonIcon1(*iconOnPen);
     penButton->setIcon(ButtonIcon1);
     penButton->setIconSize(iconOffPen->rect().size());
@@ -28,8 +28,8 @@ Tools::Tools(int *tool, QWidget *parent) : QGraphicsView(parent) {
 
     eraserButton = new QPushButton();
     eraserButton->setFixedSize(toolSize, toolSize);
-    iconOffEraser = new QPixmap(":/Icons/eraser_32x32.png");
-    iconOnEraser = new QPixmap(":/Icons/eraser_white_32x32.png");
+    iconOffEraser = new QPixmap(":/assets/eraser_32x32.png");
+    iconOnEraser = new QPixmap(":/assets/eraser_white_32x32.png");
     QIcon ButtonIcon2(*iconOffEraser);
     eraserButton->setIcon(ButtonIcon2);
     eraserButton->setIconSize(iconOffEraser->rect().size());
@@ -39,8 +39,8 @@ Tools::Tools(int *tool, QWidget *parent) : QGraphicsView(parent) {
 
     fillButton = new QPushButton();
     fillButton->setFixedSize(toolSize, toolSize);
-    iconOffFill = new QPixmap(":/Icons/fill_32x32.png");
-    iconOnFill = new QPixmap(":/Icons/fill_white_32x32.png");
+    iconOffFill = new QPixmap(":/assets/fill_32x32.png");
+    iconOnFill = new QPixmap(":/assets/fill_white_32x32.png");
     QIcon ButtonIcon3(*iconOffFill);
     fillButton->setIcon(ButtonIcon3);
     fillButton->setIconSize(iconOffFill->rect().size());

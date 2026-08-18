@@ -1,13 +1,11 @@
 <RCC>
-    <qresource prefix="/Font">
-        <file>Pixeled.ttf</file>
-    </qresource>
-    <qresource prefix="/Icons">
-        <file>eraser_32x32.png</file>
-        <file>eraser_white_32x32.png</file>
-        <file>pen_32x32.png</file>
-        <file>pen_white_32x32.png</file>
-        <file>fill_32x32.png</file>
-        <file>fill_white_32x32.png</file>
+    <qresource prefix="/">
+        <file>assets/Pixeled.ttf</file>
+        <file>assets/eraser_32x32.png</file>
+        <file>assets/eraser_white_32x32.png</file>
+        <file>assets/pen_32x32.png</file>
+        <file>assets/pen_white_32x32.png</file>
+        <file>assets/fill_32x32.png</file>
+        <file>assets/fill_white_32x32.png</file>
     </qresource>
 </RCC>

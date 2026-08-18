@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    int id = QFontDatabase::addApplicationFont(":/Font/Pixeled.ttf");
+    int id = QFontDatabase::addApplicationFont(":/assets/Pixeled.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family);
 

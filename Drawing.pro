@@ -53,10 +53,10 @@ RESOURCES += \
     resources.qrc
 
 DISTFILES += \
-    Pixeled.ttf \
-    eraser_32x32.png \
-    eraser_white_32x32.png \
-    pen_white_32x32.png \
-    pen_32x32.png \
-    fill_32x32.png \
-    fill_white_32x32.png
+    assets/Pixeled.ttf \
+    assets/eraser_32x32.png \
+    assets/eraser_white_32x32.png \
+    assets/pen_white_32x32.png \
+    assets/pen_32x32.png \
+    assets/fill_32x32.png \
+    assets/fill_white_32x32.png
