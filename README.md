@@ -6,7 +6,7 @@ A pixel art animation editor written in C++ and Qt, inspired by the PICO-8 fanta
 
 ## What it can do
 
-The editor (window title **Pixella**) is a small 12×12 pixel animation studio:
+The editor is a small 12×12 pixel animation studio:
 
 - **Draw on a 12×12 canvas.** Click and drag to paint pixels. The canvas uses a peach default background (`#FFF1E8`).
 - **Pen, eraser, and fill.** The pen paints with the selected palette color. The eraser restores pixels to the default background. Fill flood-fills a connected region of the same color.
@@ -14,7 +14,7 @@ The editor (window title **Pixella**) is a small 12×12 pixel animation studio:
 - **Multi-frame animation.** **+FRAME** duplicates the current frame and appends it. A filmstrip along the bottom shows thumbnails (up to 8); click one to edit that frame.
 - **Playback.** **PLAY** and **STOP** preview the sequence on a larger movie screen at one second per frame, looping from the start.
 - **Projects.** **NEW** starts a blank one-frame animation. **SAVE** writes frames and colors to a JSON file. **OPEN** loads a saved project. The last opened file is remembered and restored on launch.
-- **Export.** **EXPORT** captures the canvas as a PNG (`Pixella_image_<timestamp>.png`).
+- **Export.** **EXPORT** captures the canvas as a PNG.
 
 ## How to run
 

@@ -24,10 +24,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fileName = getLastOpenedFileName();
     if (fileName.length() == 0) {
-        fileName = "pixella_" + QString::number(QDateTime::currentSecsSinceEpoch());
+        fileName = "PixelArtApp_" + QString::number(QDateTime::currentSecsSinceEpoch());
         saveLastOpenedFileName();
     }
-    setWindowTitle("Pixella: [ " + fileName + " ]");
+    setWindowTitle("PixelArtApp: [ " + fileName + " ]");
 
     QFile jsonFile(fileName);
     jsonFile.open(QFile::ReadOnly);
@@ -178,7 +178,7 @@ void MainWindow::doExport() {
 
     QImage image = grab(rect).toImage();
     qint64 time = QDateTime::currentMSecsSinceEpoch();
-    QString filePath = "Pixella_image_" +   QString::number(time) + ".png";
+    QString filePath = "PixelArtApp_image_" +   QString::number(time) + ".png";
     QFile file(filePath);
     if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         image.save(&file, "PNG");
@@ -262,7 +262,7 @@ void MainWindow::loadFile(QString filename) {
     QString s = jsonFile.readAll();
 
     this->fileName = filename.mid(filename.lastIndexOf("/"));
-    setWindowTitle("Pixella: [ " + fileName + " ]");
+    setWindowTitle("PixelArtApp: [ " + fileName + " ]");
     saveLastOpenedFileName();
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(s.toUtf8());
@@ -305,10 +305,10 @@ void MainWindow::loadFile(QString filename) {
 }
 
 void MainWindow::createNew() {
-    fileName = "Pixella_ " + QString::number(QDateTime::currentSecsSinceEpoch());
+    fileName = "PixelArtApp_ " + QString::number(QDateTime::currentSecsSinceEpoch());
     frameIndex = 0;
     frames.clear();
-    setWindowTitle("Pixella: [ " + fileName + " ]");
+    setWindowTitle("PixelArtApp: [ " + fileName + " ]");
     //Add initial Data
     PixelImage *pixelImage = new PixelImage();
     for (int i = 0; i < (12 * 12); i++) { //TODO; remove hardcoded size
